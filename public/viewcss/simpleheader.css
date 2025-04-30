@@ -1,0 +1,45 @@
+.navigationbar{
+    display:flex;
+}
+.navigationbar-main{
+    display:flex;
+    gap:10%;
+    width:60%;
+}
+.navigationbar-profile{
+    display:flex;
+    width:30%;
+    justify-content:right;
+    gap:10%;
+    padding-right:5%;
+}
+.menuoverview{
+    margin:auto;
+    width:60%;
+    text-align:center;
+    position:relative;
+    margin-top:2%;
+}
+.menucontent{
+    display:flex;
+    gap:0;
+}
+.foodimagecontainer{
+    width:100%;
+    height:500px;
+    position:relative;
+    display:flex;
+    overflow:hidden;
+    justify-content:center;
+    align-items:center;
+}
+.halfflex{
+    display:flex;
+}
+.halfwidth{
+    width:50%;
+}
+.tablerowcontainer{
+    display:flex;width:100%;border-style:solid;border-color:black;border-width:2px;border-top:0px;
+    padding-top:2%;padding-bottom:2%;
+}

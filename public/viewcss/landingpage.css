@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+.slidingnavigation{
+    padding-inline-start:2ch;
+    background-color:#2C3930;
+    position:relative;
+    display:flex;
+    height:50px;
+}
+
+.partition23{
+    position:relative;
+    width:60%;
+    height:100%;
+    display:flex;
+    flex-direction:row;
+}
+.partition13{
+    position:relative;
+    width:30%;
+    height:100%;
+    display:flex;
+    flex-direction:row;
+}
+.navigationbutton{
+    position:relative;
+    display:block;
+    min-width:200px;
+    z-index:2;
+    text-align:center;
+    height:100%;
+    transition-timing-function:linear;
+    transition:background-color 0.5s;
+}
+.navigationbutton div{
+    text-align:center;
+    display:block;
+    text-decoration:none;
+    color:gold;
+    line-height:50px;
+    -webkit-text-stroke:0.25px lightgrey;
+    
+} 
+
+.indicator{
+    /* this is for a sliding bar framework */
+    min-width:200px;
+    position:absolute;
+    background-color:olive;
+    z-index:1;
+    height:50px;
+    top:0;
+    filter:drop-shadow(2px 2px 1px black)
+    
+}
+body{
+    padding:0;
+    margin:0;
+}
+.dropdownparent{
+    position:relative;
+    height: 100%;
+}
+.dropdownmenu{
+    position:absolute !important;
+    height: 0px;
+    width:100%;
+    transition:height 0.5s;
+    overflow:hidden;
+}
+.dropdownparent:hover .dropdownmenu{
+    position:absolute !important;
+    height:50px;
+    width:100%;
+    transition-timing-function:linear;
+    
+    background-color:lightgray;
+    
+}
+
+
+/*.navigationbutton:hover ~ .indicator{
+    transform:translateX(100%);
+    background-color:green;
+    transition-timing-function:ease-in;
+    transition:transform 0.5s;
+}*/
+
+/*From this segment onwards, a form module for submission.*/
+/*half page division for login. with transition */
+
+.formbody{
+    min-height:300px;
+    width:80%;
+    margin:auto;
+    display:flex;
+    filter:drop-shadow(3px 3px 2px grey);
+    border-radius:10px;
+    border-color:lightgrey;
+    justify-content:center;
+    border-style:outset;
+    background-color:white;
+}
+.formcontent{
+    width:33%;
+}
+
+.separator12{
+    min-width:50%;
+    height:1200px;
+    text-align:center;
+}
+
