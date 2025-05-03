@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id('RecipeID')->primary();
             $table->string('Name');
-            $table->float('Rating');
             $table->longText('Description');
+            $table->longText('Ingredients');
             $table->timestamps();
             $table->unsignedBigInteger('restaurant_id');
             $table->foreign('restaurant_id')->references('restaurantId')->on('restaurants')->onDelete('cascade');

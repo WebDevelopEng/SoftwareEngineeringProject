@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\acccontroller;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -37,7 +37,7 @@ Route::get('/profile', function(){
 })->name('profile');
 
 Route::get('/register',function(){
-
+    return view('registpage');
 })->name('register');
 
-Route::post('/register',[])->name('registacc');
+Route::post('/register',[acccontroller::class,'create_account'])->name('registacc');
