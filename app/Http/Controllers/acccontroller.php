@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 class acccontroller extends Controller
 {
     //
@@ -11,7 +12,7 @@ class acccontroller extends Controller
         $req->validate([
             'name'=>'required|max:50',
             'dob'=>['required','before:today','date'],
-            'email'=>'email|required',
+            'email'=>'email|required|unique:users,email',
             'password'=>'required',
         ],
     ['email.required'=>"You must input your email address.",
@@ -36,13 +37,13 @@ class acccontroller extends Controller
         ['email.required'=>"Please input a valid email address.",
         'password.required'=>"Please input a password."]
     );
-    $currentuser=User::where('email',$req->email)->where('password',$req->password)->first();
-    if ($currentuser == null){
-        return redirect('/login');
-    }
-    else{
+    $currentuser=User::where('email',$req->email)->first();
+    if ($currentuser != null && Hash::check($req->password,$currentuser->password)){
         session(['account'=>$currentuser->id]);
         return redirect('/menu');
+    }
+    else{
+        return redirect('/login');
     }
     }
     function updateaccount(){
@@ -58,6 +59,6 @@ class acccontroller extends Controller
         return redirect('/login');
     }
     function deleteaccount(){
-
+        
     }
 }
