@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Page</title>
 </head>
-<nk href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 <link href="{{asset('viewcss/simpleheader.css')}}" rel="stylesheet">
 <link href="{{asset('viewcss/css/bootstrap.css')}}" rel="stylesheet">
 <script src="https://kit.fontawesome.com/9e788b7c72.js" crossorigin="anonymous"></script>

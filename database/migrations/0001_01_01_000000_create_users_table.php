@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->date('dateofbirth');
             $table->float('balance');
+            $table->string('profilepicture')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Models\member;
 use Carbon;
 use App\Http\Models\User;
+
 class membercontroller extends Controller
 {
     //

@@ -13,6 +13,6 @@ Login
 <input type="password" id="password" name="password"><br><br>
 <input type="submit">
 </form>
+<a href="{{route('register')}}">No account yet? Register now !</a>
 </div>
-
 @endsection
