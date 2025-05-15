@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use App\Models\Restaurant;
+use App\Models\admin;
 class acccontroller extends Controller
 {
     //
@@ -39,18 +41,40 @@ class acccontroller extends Controller
         ['email.required'=>"Please input a valid email address.",
         'password.required'=>"Please input a password."]
     );
+    if($req->hidden=="userselection"){
     $currentuser=User::where('email',$req->email)->first();
     if ($currentuser != null && Hash::check($req->password,$currentuser->password)){
-        session(['user'=>$currentuser->id]);
+        session(['user'=>$currentuser]);
         return redirect('/menu');
     }
     else{
-        return redirect('/login');
+        return view('loginpage',['errormessage'=>'login failed']);
+    }
+    }
+    if($req->hidden=="restoselection"){
+        $currentuser=Restaurant::where('restaurantEmail',$req->email)->first();
+    if($currentuser!= null && $currentuser->password==$req->password){
+        session(['restaurant'=>$currentuser]);
+        return redirect('/menu');
+    }
+    else{
+        return view('loginpage',['errormessage'=>'login failed']);
+    }
+    }
+    if($req->hidden=="adminselection"){
+        $currentuser=Admin::where('email',$req->email)->first();
+    if($currentuser!=null && $currentuser->password==$req->password){
+        session(['admin'=>$currentuser]);
+        return redirect('/menu');
+    }
+    else{
+        return view('loginpage',['errormessage'=>'login failed']);
+    }
     }
     }
     function updateaccount(){
         if(session('user')!=null){
-            $account=User::find(session('user'));
+            $account=User::find(session('user')->id);
             $account->name=$req->name;
             $account->password=$req->password;
             $account->email=$req->email;
@@ -99,7 +123,7 @@ class acccontroller extends Controller
             $extension=$req->picture->getClientOriginalExtension();
             $currenttime=now()->format('YmdHis');
             $stringformat=$string.$currentuserid.$currenttime.'.'.$extension;
-            $req->picture->storeAs('/profileimage',$stringformat);
+            $req->picture->storeAs('/profileimage',$stringformat,'public');
             $profile->picture=$stringformat;
             $profile->save();
             return view('profilepage',['profile'=>$profile]);
@@ -121,5 +145,47 @@ class acccontroller extends Controller
             $admin=Admin::find($adminid);
             return view('profilepage',['admin'=>$admin]);
         }
+    }
+    function createresto(Request $req){
+        $req->validate([
+            'name'=>'required|max:50',
+            'location'=>'required|max:50',
+            'email'=>'email|required|unique:users,email',
+            'password'=>'required',
+        ],
+    ['location.required'=>"You must input your location.",
+    'password.required'=>"You must input a password.",
+    'name.max'=>"Username is too long. Please use a shorter username",
+    'email.required'=>"Please enter an email.",
+    'email.unique'=>"Email has already been registered in database.",
+    'name.required'=>"Please enter a name."
+  ]);
+    $resto=new Restaurant;
+    $resto->restaurantEmail=$req->email;
+    $resto->restaurantName=$req->name;
+    $resto->location=$req->location;
+    $resto->password=$req->password;
+    $resto->balance=0;
+    $resto->save();
+    return redirect('/login');
+    }
+    function createadmin(Request $req){
+        $req->validate([
+            'name'=>'required|max:50',
+            'email'=>'email|required|unique:users,email',
+            'password'=>'required',
+        ],
+    [
+    'password.required'=>"You must input a password.",
+    'name.max'=>"Username is too long. Please use a shorter username",
+    'email.required'=>"Please enter an email.",
+    'email.unique'=>"Email has already been registered in database.",
+    'name.required'=>"Please enter a name."
+    ]);
+        $admin=new admin;
+        $admin->email=$req->email;
+        $admin->username=$req->name;
+        $admin->password=$req->password;
+        $admin->save();
     }
 }

@@ -11,23 +11,23 @@ class recipecontroller extends Controller
         $req->validate(
             [
                 'name'=>'required|max:255',
-                'description'=>'required|min:20|string',
-                'ingredients'=>'required|min:20|string',
-                'picture'=>'nullable|image|mimes:jpeg,png,jpg|max:2048'
+                'description'=>'required|string',
+                'ingredients'=>'required|string',
+                'image'=>'nullable|image|mimes:jpeg,png,jpg|max:2048'
             ]
             );
-        $currentrestaurant=session('restaurant');
+        $currentrestaurant=session('restaurant')->id;
         $recipe= new Recipe;
         $recipe->Name=$req->name;
         $recipe->Ingredients=$req->ingredients;
         $recipe->Description=$req->description;
         $recipe->restaurant_id=$currentrestaurant;
-        if($req->picture!=null){
-            $extension=$req->picture->getClientOriginalExtension();
+        if($req->image!=null){
+            $extension=$req->image->getClientOriginalExtension();
             $currenttime=now()->format('Ymd');
-            $stringformat=$req->name.$currenttime.'.'.$extension;
-            $req->picture->storeAs('/recipeimages',$stringformat);
-            $recipe->picture=$stringformat;
+            $stringformat=$currentrestaurant.$currenttime.'.'.$extension;
+            $req->image->storeAs('/recipeimages',$stringformat,'public');
+            $recipe->image=$stringformat;
         }
         $recipe->save();
         return redirect('/recipes');

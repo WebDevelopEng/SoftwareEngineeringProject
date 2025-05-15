@@ -18,7 +18,8 @@ return new class extends Migration
             $table->longText('Ingredients');
             $table->timestamps();
             $table->unsignedBigInteger('restaurant_id');
-            $table->foreign('restaurant_id')->references('restaurantId')->on('restaurants')->onDelete('cascade');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
+            $table->string('image');
         });
     }
 

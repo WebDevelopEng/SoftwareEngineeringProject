@@ -41,7 +41,7 @@ Route::get('/register',function(){
 })->name('register');
 
 Route::post('/register',[acccontroller::class,'create_account'])->name('registacc');
-Route::get('/recipes',function(){
+Route::get('/recipe{{',function(){
     return view('templates.headandfoot');
 });
 Route::get('/login', function(){
@@ -52,3 +52,5 @@ Route::get('/menudashboard',[recipecontroller::class,'fullviewrecipe'])->name('m
 Route::post('/createmenu',[recipecontroller::class,'createrecipe'])->name('recipecreation');
 Route::get('/createmenu',function(){ return view('createmenu');})->name('recipecreatepage');
 Route::get('/logout',[acccontroller::class,'logout'])->name('logout');
+Route::post('/adminregist',function(){})->name('adminregist');
+Route::post('/restoregist',[acccontroller::class,'createresto'])->name('restoregist');

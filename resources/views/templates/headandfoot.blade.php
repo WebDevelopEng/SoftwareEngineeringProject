@@ -28,7 +28,8 @@
 </div>
         @elseif(Session::get('restaurant'))
         <div><a href="{{route('recipecreation')}}">Create a Recipe</a></div>
-        <div><a href="{{route('myrecipes')}}">My Recipes</a></div>
+        <div><a href="">My Recipes</a></div>
+</div>
         <div class="navigationbar-profile">
         <div><a href="{{route('profile')}}">Profile</a></div>
         <div><a href="{{route('logout')}}>">Logout</a></div>

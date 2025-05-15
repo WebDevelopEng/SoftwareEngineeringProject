@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('restaurants', function (Blueprint $table) {
-            $table->id('restaurantId')->primary();
+            $table->id()->primary();
             $table->string('restaurantName');
             $table->double('balance');
-            $table->string('restaurantUsername');
-            $table->string('restaurantPassword');
+            $table->string('restaurantEmail');
+            $table->string('password');
+            $table->string('location');
             $table->timestamps();
         });
     }
