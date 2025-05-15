@@ -52,5 +52,5 @@ Route::get('/menudashboard',[recipecontroller::class,'fullviewrecipe'])->name('m
 Route::post('/createmenu',[recipecontroller::class,'createrecipe'])->name('recipecreation');
 Route::get('/createmenu',function(){ return view('createmenu');})->name('recipecreatepage');
 Route::get('/logout',[acccontroller::class,'logout'])->name('logout');
-Route::post('/adminregist',function(){})->name('adminregist');
+Route::post('/adminregist',[acccontroller::class,'createadmin'])->name('adminregist');
 Route::post('/restoregist',[acccontroller::class,'createresto'])->name('restoregist');

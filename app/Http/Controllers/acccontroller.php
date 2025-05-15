@@ -187,5 +187,6 @@ class acccontroller extends Controller
         $admin->username=$req->name;
         $admin->password=$req->password;
         $admin->save();
+        return redirect('/login');
     }
 }
