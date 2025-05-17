@@ -11,7 +11,8 @@ class Recipe extends Model
         'Name',
         'Rating',
         'Description',
-        'restaurant_id'
+        'restaurant_id',
+        'premium'
     ];
     protected $primaryKey='RecipeID';
 

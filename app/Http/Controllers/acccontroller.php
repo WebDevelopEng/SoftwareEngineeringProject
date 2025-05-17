@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\Restaurant;
 use App\Models\admin;
+use App\Models\Recipe;
 class acccontroller extends Controller
 {
     //
@@ -31,7 +32,7 @@ class acccontroller extends Controller
     $account->email=$req->email;
     $account->balance=0;
     $account->save();
-    return redirect('/menu');
+    return redirect('/login');
     }
     function login_account(Request $req){
         $req->validate([
@@ -45,7 +46,7 @@ class acccontroller extends Controller
     $currentuser=User::where('email',$req->email)->first();
     if ($currentuser != null && Hash::check($req->password,$currentuser->password)){
         session(['user'=>$currentuser]);
-        return redirect('/menu');
+        return redirect('/menudashboard');
     }
     else{
         return view('loginpage',['errormessage'=>'login failed']);
@@ -55,7 +56,7 @@ class acccontroller extends Controller
         $currentuser=Restaurant::where('restaurantEmail',$req->email)->first();
     if($currentuser!= null && $currentuser->password==$req->password){
         session(['restaurant'=>$currentuser]);
-        return redirect('/menu');
+        return redirect('/menudashboard');
     }
     else{
         return view('loginpage',['errormessage'=>'login failed']);
@@ -65,7 +66,7 @@ class acccontroller extends Controller
         $currentuser=Admin::where('email',$req->email)->first();
     if($currentuser!=null && $currentuser->password==$req->password){
         session(['admin'=>$currentuser]);
-        return redirect('/menu');
+        return redirect('/menudashboard');
     }
     else{
         return view('loginpage',['errormessage'=>'login failed']);
@@ -96,15 +97,7 @@ class acccontroller extends Controller
 
     }
     function profilepage(){
-        if (!Session::get('user')){
-            
-        }
-        if(!Session::get('restaurant')){
-
-        }
-        if(!Session::get('admin')){
-
-        }
+       return view('profilepage');
     }
     function uploadprofilepicture(Request $req){
         if($req->picture!=null){
@@ -150,7 +143,7 @@ class acccontroller extends Controller
         $req->validate([
             'name'=>'required|max:50',
             'location'=>'required|max:50',
-            'email'=>'email|required|unique:users,email',
+            'email'=>'email|required|unique:restaurants,restaurantEmail',
             'password'=>'required',
         ],
     ['location.required'=>"You must input your location.",
@@ -172,7 +165,7 @@ class acccontroller extends Controller
     function createadmin(Request $req){
         $req->validate([
             'name'=>'required|max:50',
-            'email'=>'email|required|unique:users,email',
+            'email'=>'email|required|unique:admins,email',
             'password'=>'required',
         ],
     [
@@ -188,5 +181,53 @@ class acccontroller extends Controller
         $admin->password=$req->password;
         $admin->save();
         return redirect('/login');
+    }
+    function viewallprofile(){
+        if (Session::get('restaurant')){
+        $currentresto=Session::get('restaurant');
+        $recipecollection=Recipe::where('restaurant_id','=',$currentresto->id)->get();
+        return view('profilepage',['collection'=>$recipecollection]);
+        }
+        if(Session::get('user')){
+            $currentuser=Session::get('user');
+            $collection1=Member::where('memberId','=', $currentuser->id)->get();
+            return view('profilepage',['collection'=>$collection1]);
+        }
+        if(Session::get('admin')){
+            $currentadmin=Session::get('admin');
+            return view('profilepage');
+        }
+    }
+    function updateresto(Request $req){
+        $restoid=Session::get('restaurant')->id;
+        $resto=Restaurant::find($restoid);
+        $req->validate([
+            'name'=>'required|max:50',
+            'location'=>'required|max:50',
+            'email'=>'email|required|unique:restaurants,restaurantEmail,'.$resto->id,
+            'password'=>'required',
+        ],
+    ['location.required'=>"You must input your location.",
+    'password.required'=>"You must input a password.",
+    'name.max'=>"Username is too long. Please use a shorter username",
+    'email.required'=>"Please enter an email.",
+    'email.unique'=>"Email has already been registered in database.",
+    'name.required'=>"Please enter a name."
+  ]);
+    
+    if($req->image!=null){
+            $extension=$req->image->getClientOriginalExtension();
+            $currenttime=now()->format('YmdHis');
+            $stringformat='rest'.$currenttime.'.'.$extension;
+            $req->image->storeAs('/profileimages',$stringformat,'public');
+            $resto->image=$stringformat;
+        }
+    $resto->restaurantEmail=$req->email;
+    $resto->restaurantName=$req->name;
+    $resto->location=$req->location;
+    $resto->password=$req->password;
+    $resto->save();
+    session(['restaurant'=>$resto]);
+    return redirect('/profile');
     }
 }

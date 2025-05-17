@@ -32,10 +32,7 @@ class membercontroller extends Controller
         $member->save();
         }
         else{
-            return redirect('/subscription',['error1','Insufficient balance']);
+            return view('/subscription',['error1','Insufficient balance']);
         }
-    }
-    function accesspremium(Request $req){
-        
     }
 }

@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('restaurantEmail');
             $table->string('password');
             $table->string('location');
+            $table->string('image')->nullable();
             $table->timestamps();
+            $table->longText('description')->nullable();
         });
     }
 

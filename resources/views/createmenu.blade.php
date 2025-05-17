@@ -20,6 +20,9 @@ Create a recipe
     <textarea class="form-control" id="description" name="description" rows="4" cols="50" placeholder="Enter your description"></textarea>
     <label for="ingredients">Ingredients:</label>
     <textarea class="form-control" id="ingredients" name="ingredients" rows="4" cols="50" placeholder="Enter your ingredients"></textarea>
+    <div class="form-check">
+    <input class="form-check-input" type="radio"  name="premium" id="radio1" value='1'>  <label class="form-check-label" for="radio1">Premium</label></div><div class="form-check"><input class="form-check-input" type="radio"  name="premium" id="radio1" value='0'>
+    <label class="form-check-label" for="radio2">Non Premium</label> </div>
     <div>
         <input type="file" style="display:block;width:50%;" accept="image/*" onchange="imagepreview(this,'previewimage')" name="image" id="imageupload">
         <img style="width:50%;display:none;" class='preview' src="" id="previewimage">

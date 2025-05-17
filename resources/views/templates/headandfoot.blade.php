@@ -9,14 +9,15 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 <link href="{{asset('viewcss/simpleheader.css')}}" rel="stylesheet">
 <link href="{{asset('viewcss/css/bootstrap.css')}}" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/9e788b7c72.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 <div class="navbar navbar-light bg-light navigationbar">
         <div class="navigationbar-main">
-        <div class="navbar-button"> DonaCook </div>
-        <div><a href="{{route('menu')}}"> Menus </a> </div>
+        <div class="navbar-button" style="padding-left:2%;"> DonaCook </div>
+        <div><a href="{{route('menudashboard')}}"> Menus </a> </div>
         @if (Session::get('user'))
         <div><a href="{{route('bookmarks')}}"> Bookmarks </a></div>
         <div><a href="{{route('donate')}}"> Donate</a></div>
@@ -32,7 +33,7 @@
 </div>
         <div class="navigationbar-profile">
         <div><a href="{{route('profile')}}">Profile</a></div>
-        <div><a href="{{route('logout')}}>">Logout</a></div>
+        <div><a href="{{route('logout')}}">Logout</a></div>
 </div>
         @elseif(Session::get('admin'))
         <div><a href="{{route('restaurants')}}">Restaurants</a></div>

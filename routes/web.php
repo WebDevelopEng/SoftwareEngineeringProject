@@ -33,17 +33,15 @@ Route::get('/login',function(){
 
 })->name('login');
 
-Route::get('/profile', function(){
-    return view('profilepage');
-})->name('profile');
+Route::get('/profile', [acccontroller::class,'viewallprofile']
+)->name('profile');
 Route::get('/register',function(){
     return view('registpage');
 })->name('register');
 
 Route::post('/register',[acccontroller::class,'create_account'])->name('registacc');
-Route::get('/recipe{{',function(){
-    return view('templates.headandfoot');
-});
+Route::get('/viewrecipe/{recipeid}',[recipecontroller::class,'viewparticularrecipe']
+);
 Route::get('/login', function(){
     return view('loginpage');
 })->name('login');
@@ -54,3 +52,5 @@ Route::get('/createmenu',function(){ return view('createmenu');})->name('recipec
 Route::get('/logout',[acccontroller::class,'logout'])->name('logout');
 Route::post('/adminregist',[acccontroller::class,'createadmin'])->name('adminregist');
 Route::post('/restoregist',[acccontroller::class,'createresto'])->name('restoregist');
+Route::post('/menudashboard',[recipecontroller::class,'searchrecipe'])->name('searchrecipe');
+Route::post('/restoprofile',[acccontroller::class,'updateresto']);

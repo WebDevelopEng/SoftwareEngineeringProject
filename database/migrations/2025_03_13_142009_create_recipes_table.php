@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('restaurant_id');
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
+            $table->boolean('premium');
             $table->string('image');
         });
     }
