@@ -9,13 +9,23 @@ class adscontroller extends Controller
     //
     function createads(){
         $req->validate([
-            'url'=>'required',
-            'description'=>'required'
+            'url' => 'required',
+            'description' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
+        
         $ad=new Ad;
         $ad->url=$req->url;
         $ad->description=$req->description;
+        if($req->image!=null){
+            $extension=$req->image->getClientOriginalExtension();
+            $currenttime=now()->format('Ymd');
+            $stringformat=$currentrestaurant.$currenttime.'.'.$extension;
+            $req->image->storeAs('/adsimages',$stringformat,'public');
+            $recipe->image=$stringformat;
+        }
         $ad->save();
+        return redirect('/ads');
     }
     function readads(){
         $ads=Ad::all();
