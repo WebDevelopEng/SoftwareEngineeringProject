@@ -35,4 +35,10 @@ class membercontroller extends Controller
             return view('/subscription',['error1','Insufficient balance']);
         }
     }
+    function subscribeview(Request $req){
+        $req->validate(
+
+
+        );
+        }
 }

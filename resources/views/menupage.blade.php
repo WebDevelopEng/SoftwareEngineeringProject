@@ -11,7 +11,7 @@
         <h3 class="title" style="margin-bottom:2%;"> {{$recipe->Name}}</h3>
         <div class="foodimagecontainer" style="border-width:2px;border-bottom:0px;border-top:0px;">
             <img style="position:absolute;object-fit:fill;width:inherit;height:inherit;filter:blur(10px)grayscale(100);" src="{{$imageurl}}"> 
-        <img style="position:relative;vertical-align:middle;width:100%;height:100%;object-fit:none;border-style:solid;border-left:0px;border-right:0px;" src="{{$imageurl}}"></div>
+        <img style="position:relative;vertical-align:middle;width:100%;height:100%;object-fit:contain;border-style:solid;border-left:0px;border-right:0px;" src="{{$imageurl}}"></div>
     <div class="tablerowcontainer" style="border-width:0px;">
         <div class="halfwidth">
         <h5 style="line-height:50px;margin:0;"> Restaurant Author </h5>

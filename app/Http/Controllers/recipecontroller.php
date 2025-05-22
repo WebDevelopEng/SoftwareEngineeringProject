@@ -7,6 +7,7 @@ use App\Models\Recipe;
 use App\Models\Restaurant;
 use App\Models\member;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 class recipecontroller extends Controller
 {
     //
@@ -50,7 +51,7 @@ class recipecontroller extends Controller
         }}
         return view('menudashboard',['collection'=> $collection,'membership'=>$membershipstatus,'state'=>1]);
     }
-    function updaterecipe(Request $req, $recipeid){
+    function updaterecipe(Request $req,$id){
         $req->validate(
             [
                 'name'=>'required|max:255',
@@ -58,7 +59,7 @@ class recipecontroller extends Controller
                 'ingredients'=>'required|min:20'
             ]
             );
-        $currentrecipe=Recipe::find($recipeid);
+        $currentrecipe=Recipe::find($id);
         $currentrecipe->Name=$req->name;
         $currentrecipe->Ingredients=$req->ingredients;
         $currentrecipe->Description=$req->description;
@@ -69,14 +70,13 @@ class recipecontroller extends Controller
         $collection=Recipe::paginate(20);
         $membershipstatus=0;
         if(Session::get('user')){
-        $member=member::where('memberId','=',Session::get('user')->id)->where('membershipDueDate','>=',Carbon::now()->format('Y-m-d'));
+        $member=member::where('memberId','=',Session::get('user')->id)->where('membershipDueDate','>=',Carbon::now()->format('Y-m-d'))->first();
         if($member==null){
             $membershipstatus=0;
         }
         else{
             $membershipstatus=1;
         }}
-        
         return view('menudashboard',['collection'=> $collection,'membership'=>$membershipstatus]);
     }
     function viewparticularrecipe(Request $req,$recipeid){
@@ -90,7 +90,10 @@ class recipecontroller extends Controller
         }
         $receivingrestaurant->balance=$receivingrestaurant->balance+50;
         $receivingrestaurant->save();   // ini untuk pendapatan ads dari suatu akses sebuah resep.
-        return view('menupage',['recipe'=>$recipe , 'recipeid'=>$recipeid]);
+        return view('menupage',['recipe'=>$recipe ,'restaurant'=>$receivingrestaurant]);
     }
-    
+    function recipeeditpage(Request $req, $recipeid){
+        $currentrecipe=Recipe::find($recipeid);
+        return view('editrecipe',['recipe'=>$recipe]);
+    }
 }

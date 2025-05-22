@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Restaurant;
 use App\Models\admin;
 use App\Models\Recipe;
+use App\Models\member;
+use Carbon\Carbon;
 class acccontroller extends Controller
 {
     //
@@ -73,18 +75,6 @@ class acccontroller extends Controller
     }
     }
     }
-    function updateaccount(){
-        if(session('user')!=null){
-            $account=User::find(session('user')->id);
-            $account->name=$req->name;
-            $account->password=$req->password;
-            $account->email=$req->email;
-            $account->dob=$req->dob;
-            $account->save();
-            return redirect('/profile');
-        }
-        return redirect('/login');
-    }
     function deleteaccount(){
         
     }
@@ -120,23 +110,6 @@ class acccontroller extends Controller
             $profile->picture=$stringformat;
             $profile->save();
             return view('profilepage',['profile'=>$profile]);
-        }
-    }
-    function viewprofile(){
-        if(Session::get('user')){
-            $userid=Session::get('user');
-            $currentuser=User::find($userid);
-            return view('profilepage',['user'=>$currentuser]);
-        }
-        if(Session::get('restaurant')){
-            $restaurantid=Session::get('restaurant');
-            $restaurant=Restaurant::find($restaurantid);
-            return view('profilepage',['restaurant'=>$restaurant]);
-        }
-        if(Session::get('admin')){
-            $adminid=Session::get('admin');
-            $admin=Admin::find($adminid);
-            return view('profilepage',['admin'=>$admin]);
         }
     }
     function createresto(Request $req){
@@ -185,33 +158,30 @@ class acccontroller extends Controller
     function viewallprofile(){
         if (Session::get('restaurant')){
         $currentresto=Session::get('restaurant');
-        $recipecollection=Recipe::where('restaurant_id','=',$currentresto->id)->get();
+        $recipecollection=Recipe::where('restaurant_id','=',$currentresto->id)->paginate(8);
         return view('profilepage',['collection'=>$recipecollection]);
         }
         if(Session::get('user')){
             $currentuser=Session::get('user');
-            $collection1=Member::where('memberId','=', $currentuser->id)->get();
-            return view('profilepage',['collection'=>$collection1]);
+            $collection1=member::where('memberId','=', $currentuser->id)->take(20)->get();
+            $collection2=member::where('memberId','=',$currentuser->id)->where('membershipDueDate','>=',Carbon::now()->format('Y-m-d'))->first();
+            return view('profilepage',['collection1'=>$collection1 ,'user'=>$currentuser,'collection2'=>$collection2]);
         }
         if(Session::get('admin')){
             $currentadmin=Session::get('admin');
             return view('profilepage');
         }
     }
-    function updateresto(Request $req){
+    function updaterestoprofile(Request $req){
         $restoid=Session::get('restaurant')->id;
         $resto=Restaurant::find($restoid);
         $req->validate([
             'name'=>'required|max:50',
             'location'=>'required|max:50',
-            'email'=>'email|required|unique:restaurants,restaurantEmail,'.$resto->id,
-            'password'=>'required',
+            'image'=>'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ],
     ['location.required'=>"You must input your location.",
-    'password.required'=>"You must input a password.",
     'name.max'=>"Username is too long. Please use a shorter username",
-    'email.required'=>"Please enter an email.",
-    'email.unique'=>"Email has already been registered in database.",
     'name.required'=>"Please enter a name."
   ]);
     
@@ -222,12 +192,60 @@ class acccontroller extends Controller
             $req->image->storeAs('/profileimages',$stringformat,'public');
             $resto->image=$stringformat;
         }
-    $resto->restaurantEmail=$req->email;
     $resto->restaurantName=$req->name;
     $resto->location=$req->location;
-    $resto->password=$req->password;
     $resto->save();
     session(['restaurant'=>$resto]);
     return redirect('/profile');
     }
+    function loginonce(){
+        if(Session::get('restaurant')||Session::get('user')||Session::get('admin')){
+            return redirect('/menudashboard');
+        }
+        else{
+            return view('loginpage');
+        }
+    }
+    function updateuserprofile(Request $req){
+        $userid=Session::get('user')->id;
+        $user=User::find($userid);
+        $req->validate([
+            'name'=>'required|max:50',
+            'dob'=>'required|date',
+            'image'=>'nullable|image|mimes:jpeg,png,jpg|max:2048'
+        ],
+    ['dob.required'=>"You must input your date of birth.",
+    'name.max'=>"Username is too long. Please use a shorter username",
+    'name.required'=>"Please enter a name."
+  ]);
+    
+    if($req->image!=null){
+            $extension=$req->image->getClientOriginalExtension();
+            $currenttime=now()->format('YmdHis');
+            $stringformat='use'.$currenttime.'.'.$extension;
+            $req->image->storeAs('/profileimages',$stringformat,'public');
+            $user->profilepicture=$stringformat;
+        }
+    $user->name=$req->name;
+    $user->dateofbirth=$req->dob;
+    $user->save();
+    session(['user'=>$user]);
+    return redirect('/profile');
+    }
+    function upuseraccount(Request $req){
+    $userid=Session::get('user')->id;
+    $user=User::find($userid);
+    $req->validate([
+            'email'=>'email|required|unique:users,email,'.$userid,
+            'password'=>'required',
+        ],
+    ['email.required'=>"You must input your email address.",
+    'password.required'=>"You must input a password."  ]);
+    $user->email=$req->email;
+    $user->password=$req->password;
+    $user->save();
+    session(['user'=>$user]);
+    return redirect('/profile');
 }
+}
+

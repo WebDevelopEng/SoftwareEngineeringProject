@@ -5,6 +5,7 @@
 @section('content')
     <script src="{{asset('/viewjs/profilepage.js')}}"></script>
     <link href="{{asset('/viewcss/profilepage.css')}}" type="stylesheet">
+    <div style="position:absolute;background-color:black;z-index:2;opacity:0.5;width:100%;height:100%;display:none;" id="background-fade"></div>
     @if (null!==Session::get('restaurant'))
     @php
     $restaurant=Session::get('restaurant');
@@ -14,17 +15,13 @@
     else{
     $imageurl='storage/profileimages/'.$imageurl;}
     @endphp
-    <div style="position:absolute;background-color:black;z-index:2;opacity:0.5;width:100%;height:100%;display:none;" id="background-fade"></div>
-    <div style="position:absolute;width:50%;display:none;margin:auto;top:50%;left:50%;transform:translate(-50%,-50%);background-color:white;opacity:1;z-index:3;padding-top:2%;padding-bottom:2%;padding-left:2%;padding-right:2%;" id="updateform" >
-                <span style="white-space:pre"><h3 style="display:inline">Edit Profile</h3>              <button class="btn btn-dark" style="display:inline;" type="button" onclick="closepopup()"><i class="fas fa-window-close"></i></button></span> 
+    
+    <div style="position:absolute;width:50%;display:none;margin:auto;top:50%;left:50%;transform:translate(-50%,-50%);background-color:white;opacity:1;z-index:3;padding-top:2%;padding-bottom:2%;padding-left:2%;padding-right:2%;" id="updateresto" >
+                <span style="white-space:pre"><h3 style="display:inline">Update Profile</h3>              <button class="btn btn-dark" style="display:inline;" type="button" onclick="closepopup('updateresto')"><i class="fas fa-window-close"></i></button></span> 
                 <form method="post" action="/restoprofile" enctype="multipart/form-data" >
                     @csrf
                     <label for="name">Name: </label>
                     <input class="form-control" type="text" id="name" name="name" value="{{$restaurant->restaurantName}}">
-                    <label for="password">Password:</label>
-                    <input class="form-control" type="password" id="password" name="password" value="{{$restaurant->password}}">
-                    <label for="email">Email: </label>
-                    <input class="form-control" type="text" id="email" name="email" value="{{$restaurant->restaurantEmail}}">
                     <label for="location"> Location: </label>
                     <input class="form-control" type="text" id="location" name="location" value="{{$restaurant->location}}">
                     <label for="profilepicture">Add a profile picture: </label>
@@ -41,17 +38,17 @@
                 <h5>{{$restaurant->restaurantName}}</h5>
                 <i class="fa-solid fa-envelope"></i>: {{$restaurant->restaurantEmail}}<br>
                 <i class="fa-solid fa-location-dot"></i>: {{$restaurant->location}}<br>
-                <i class="fas fa-newspaper"></i>: {{$restaurant->description}}<br>
-                <button class="btn btn-dark" type="button" onclick="popupedit()">Update Profile</button>
+                <button class="btn btn-dark" type="button" onclick="popupedit('updateresto')">Update Profile</button>
             </div>
         </div>
         <div style="width:60%;border-style:solid;border-width:2px;border-radius:5px;padding-left:2%;padding-right:2%;padding-top:5px;">
-            <div><h3>Recipe Collection:</h3>
-                <div style="display:flex;height:auto;">
+            <div><h3>Recipe Collection:</h3><br>
+                <div style="display:flex;height:auto;max-height:800px;overflow:auto;">
                 @foreach($collection as $recipe)
                     @php
                     $imageurl="/storage/recipeimages/".$recipe->image;
                     $recipeurl="/viewrecipe/".$recipe->RecipeID;
+                    $editurl="/editrecipe/".$recipe->RecipeID;
                     @endphp
                 <div class="card" style="width:12rem;">
                 <div>
@@ -62,15 +59,32 @@
                     <p class="card-text">{{Str::limit($recipe->Description,25)}}</p>
                 </div>
                 <div style="width:80%;text-align:center;font-size:0.8em">
-                    <a class="btn btn-dark" style="font-size:0.8em"   href="{{$recipeurl}}" class="card-link">View and Edit  <i class="fa-solid fa-arrow-right"></i></a>
-                
+                    <a class="btn btn-dark" style="font-size:0.8em"   href="{{$recipeurl}}" class="card-link"><i class="fa-solid fa-eye"></i> View </a>
+                    <a class="btn btn-info" style="font-size:0.8em" href="{{$editurl}}" class="card-link"><i class="fas fa-edit"></i> Edit </a>
                 </div>
                 </div>
                 @endforeach
                  </div>
             </div>
-            
+            {{$collection->links()}}
+            <br><br>
+            <h3>Edit Account</h3>
+            <div style="min-height:200px;">
+            <form method="post" action="{{route('upuseracc')}}">
+                @csrf
+                <label for="email">Change Email: </label>
+                <input class="form-control"  type="text" name="email" value="{{$restaurant->restaurantEmail}}" id="email">
+                <label for="password">Change Password: </label> 
+                <input class="form-control"  type="password" name="password" id="password"><br>
+                <button class="btn btn-dark" style="margin-bottom:50px;">Update Account</button><br>
+            </form>
+            </div>
+            <div><h3>Credit</h3>
+            <b>Balance:</b> {{$restaurant->balance}}
+            </div>
+            <br><br>
         </div>
+        
     </div>
     @endif
     
@@ -82,26 +96,82 @@
     else{
     $imageurl='storage/profileimages/'.$imageurl;}
     @endphp
-    <div style="width:60%;margin:auto;height:1200px;">
-        <div style="width:40%;">
-        <div style="width:80%;margin:auto;margin-top:2%;margin-bottom:2%;"><img src='{{$imageurl}}' style="height:200px;width:200px;"></div>
+    <div style="position:absolute;width:50%;display:none;margin:auto;top:50%;left:50%;transform:translate(-50%,-50%);background-color:white;opacity:1;z-index:3;padding-top:2%;padding-bottom:2%;padding-left:2%;padding-right:2%;" id="updateuser" >
+                <span style="white-space:pre"><h3 style="display:inline">Update Profile</h3>              <button class="btn btn-dark" style="display:inline;" type="button" onclick="closepopup('updateuser')"><i class="fas fa-window-close"></i></button></span> 
+                <form method="post" action="/userprofile" enctype="multipart/form-data" >
+                    @csrf
+                    <label for="name">Name: </label>
+                    <input class="form-control" type="text" id="name" name="name" value="{{$user->name}}">
+                    <label for="location"> Date of Birth: </label>
+                    <input class="form-control" type="date" id="location" name="dob" value="{{$user->dateofbirth}}">
+                    <label for="profilepicture">Add a profile picture: </label>
+                    <input class="form-control" type="file" id="image" name="image">
+                    <button class="btn btn-dark">Update</button>
+                </form>
+            </div>
+    <div style="width:80%;margin:auto;margin-top:2%;border-radius:2px;display:flex;">
+        <div style="width:40%;border-style:solid;border-width:2px;border-radius:5px;">
+            <div style="width:80%;margin:auto;margin-top:2%;margin-bottom:2%;text-align:center;"><img src="{{$imageurl}}" style="height:200px;width:200px;">
+            </div>
+            <div class="accountinformation" style="text-align:center;">
+                <h5>{{$user->name}}</h5>
+                <i class="fa-solid fa-envelope"></i>: {{$user->email}}<br>
+                <i class="fa-solid fa-calendar"></i>: {{$user->dateofbirth}}<br>
+                <button class="btn btn-dark" type="button" onclick="popupedit('updateuser')">Update Profile</button>
+            </div>
         </div>
-     <div style="width:60%;">
-        <div style="width:80%;margin:auto;margin-top:2%;margin-bottom:2%;">
-            <b>Username</b>: $user->name
-            <b>Email</b> : $user->email
-            <b>Date of Birth</b>: $user->dob
-            <b>Balance</b>: $user->balance
-</div>
-</div>
-    </div>
+        <div style="width:60%;border-style:solid;border-width:2px;border-radius:5px;padding-left:2%;padding-right:2%;padding-top:5px;">
+            <h3> Subscription </h3>
+            
+            <div style="min-height:200px;">
+                @if($collection2==null)
+                    <b>Subscription Status: Inactive </b>
+                @else
+                    <b>Subscription Status: Active</b>
+                <h6>Subscription History</h6>
+                @endif
+                <div style="overflow:auto">
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th>Member Transaction ID</th>
+                        <th>Purchase Date</th>
+                        <th>Price</th>
+                        <th>Due Date</th>
+                        </tr>
+                    </thead>
+                @if(!$collection1->isEmpty())
+                @foreach($collection1 as $subhistory)
+                    <tr>
+                    <th>{{$subhistory->memberId}}</th>
+                    <th>{{$subhistory->membershipStart}}</th>
+                    <th>{{$subhistory->price}}</th>
+                    <th>{{$subhistory->membershipDueDate}}</th>
+                    </tr>
+                @endforeach
+                @endif
+                </table>
+                </div>
+            </div>
+            <h3>Edit Account</h3>
+            <div style="min-height:200px;">
+            <form method="post" action="{{route('upuseracc')}}">
+                @csrf
+                <label for="email">Change Email: </label>
+                <input class="form-control"  type="text" name="email" value="{{$user->email}}" id="email">
+                <label for="password">Change Password: </label> 
+                <input class="form-control"  type="password" name="password" id="password"><br>
+                <button class="btn btn-dark" style="margin-bottom:50px;">Update Account</button><br>
+            </form>
+            </div>
+        </div>
     @endif
     @if(null!==Session::get('admin'))
      <div style="width:60%;margin:auto;height:1200px;display:flex;">
         <div style="width:40%;">
             <div style="width:80%;margin:auto;margin-top:2%;margin-bottom:2%;"></div>
      </div>
-     <div style="width:60%;">
+     <div style="width:60%;border-style:solid;border-width:2px;border-radius:5px;padding-left:2%;padding-right:2%;padding-top:5px;">
        
 </div>
 </div>

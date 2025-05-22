@@ -24,7 +24,7 @@
         <div><a href="{{route('restaurants')}}"> Restaurants </a> </div>
         </div>
         <div class="navigationbar-profile">
-        <div><a href="{{route('profile')}}">Profile</a></div>
+        <div><a href="{{route('profile')}}">Account</a></div>
         <div><a href="{{route('logout')}}">Logout </a></div>
 </div>
         @elseif(Session::get('restaurant'))
@@ -32,14 +32,14 @@
         <div><a href="">My Recipes</a></div>
 </div>
         <div class="navigationbar-profile">
-        <div><a href="{{route('profile')}}">Profile</a></div>
+        <div><a href="{{route('profile')}}">Account</a></div>
         <div><a href="{{route('logout')}}">Logout</a></div>
 </div>
         @elseif(Session::get('admin'))
         <div><a href="{{route('restaurants')}}">Restaurants</a></div>
         </div>
         <div class="navigationbar-profile">
-        <div><a href="{{route('profile')}}">Profile</a></div>
+        <div><a href="{{route('profile')}}">Account</a></div>
         <div><a href="{{route('logout')}}">Logout </a></div>
 </div>
         @else

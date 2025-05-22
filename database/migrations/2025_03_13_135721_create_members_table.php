@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->foreign('memberId')->references('id')->on('users')->onDelete('cascade');
+            $table->float('price');
             $table->id('memberId');
             $table->boolean('activeStatus');
             $table->date('membershipDueDate');
-            $table->timestamps();
+            $table->date('membershipStart');
         });
     }
 

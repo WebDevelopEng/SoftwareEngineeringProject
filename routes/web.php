@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\acccontroller;
 use App\Http\Controllers\recipecontroller;
+use App\Http\Controllers\membercontroller;
+use App\Http\Middleware\EditRecipe;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -29,9 +31,9 @@ Route::get('/restaurants', function(){
 
 })->name('restaurants');
 
-Route::get('/login',function(){
+Route::get('/subscribe',function(){
 
-})->name('login');
+})->name('subscribe');
 
 Route::get('/profile', [acccontroller::class,'viewallprofile']
 )->name('profile');
@@ -42,9 +44,8 @@ Route::get('/register',function(){
 Route::post('/register',[acccontroller::class,'create_account'])->name('registacc');
 Route::get('/viewrecipe/{recipeid}',[recipecontroller::class,'viewparticularrecipe']
 );
-Route::get('/login', function(){
-    return view('loginpage');
-})->name('login');
+Route::get('/login', 
+    [acccontroller::class,'loginonce'])->name('login');
 Route::post('/login',[acccontroller::class,'login_account'])->name('loginacc');
 Route::get('/menudashboard',[recipecontroller::class,'fullviewrecipe'])->name('menudashboard');
 Route::post('/createmenu',[recipecontroller::class,'createrecipe'])->name('recipecreation');
@@ -54,3 +55,11 @@ Route::post('/adminregist',[acccontroller::class,'createadmin'])->name('adminreg
 Route::post('/restoregist',[acccontroller::class,'createresto'])->name('restoregist');
 Route::post('/menudashboard',[recipecontroller::class,'searchrecipe'])->name('searchrecipe');
 Route::post('/restoprofile',[acccontroller::class,'updateresto']);
+Route::get('/adminregist',function(){
+    return view('adminregister');
+});
+Route::post('/userprofile',[acccontroller::class,'updateuserprofile']);
+Route::post('/useracc',[acccontroller::class,'upuseraccount'])->name('upuseracc');
+Route::get('/subscription',[membercontroller::class,'subscription'])->name('subscription');
+Route::post('/subscription',[membercontroller::class,'createsub'])->name('createsub');
+Route::get('/editpage/{i}',[recipecontroller::class,'recipeeditpage'])->name('editrecipe');
