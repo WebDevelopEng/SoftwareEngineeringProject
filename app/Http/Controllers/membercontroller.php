@@ -3,42 +3,53 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models\member;
-use Carbon;
-use App\Http\Models\User;
+use App\Models\member;
+use Carbon\Carbon;
+use App\Models\User;
 
 class membercontroller extends Controller
 {
     //
     function subscribe(Request $req){
         $req->validate([
-            'days'=>'required',
-            'months'=>'required',
-            'years'=>'required'
+            'enddate'=>'required'
         ]);
         
-        $user=User::find(session('account'));
-        $totalaccount=300 * $req->years + 28*req->months + $req->days; 
-        if($user->balance >=$totalaccount ){
+        $user=User::find(session('user')->id);
         $currenttime=Carbon::now();
-        $currenttime=$currenttime.addYears($req->years);
-        $currenttime=$currenttime.addMonths($req->months);
-        $currenttime=$currenttime.addDays($req->days);
+        $enddate=Carbon::createFromDate($req->enddate);
+        $difference=Carbon::createFromDate($req->enddate)->diff($currenttime);
+        $price=$difference->y*3000+$difference->m*280+$difference->d*10+$difference->h*1;
+        if($user->balance >=$price ){
         $member= new member;
         $currenttime=$currenttime->format('Y-m-d H:i:s');
-        $member->membershipDueDate=$currenttime;
-        $member->memberId=session('account');
+        $member->membershipDueDate=$enddate->format('Y-m-d H:i:s');
+        $member->memberId=session('user')->id;
+        $member->membershipStart=$currenttime;
         $member->activeStatus=1;
+        $member->price=$price;
         $member->save();
+        $user->balance=$user->balance-$price;
+        
+        $user->save();
+        session(['user'=>$user]);
+        return redirect(route('profile'));
         }
         else{
             return view('/subscription',['error1','Insufficient balance']);
         }
     }
-    function subscribeview(Request $req){
-        $req->validate(
-
-
-        );
-        }
+    function refillbalance(Request $req){
+        $req->validate([
+            'balance'=>'required'
+        ]);
+        $currentuser=User::find(session('user')->id);
+        $currentuser->balance=$req->balance+$currentuser->balance;
+        $currentuser->save();
+        session(['user'=>$currentuser]);
+        return redirect('/profile');
+    }
+    function subscription(Request $req){
+        return view('subscription');
+    }
 }

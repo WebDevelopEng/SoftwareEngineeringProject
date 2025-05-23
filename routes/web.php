@@ -5,6 +5,7 @@ use App\Http\Controllers\acccontroller;
 use App\Http\Controllers\recipecontroller;
 use App\Http\Controllers\membercontroller;
 use App\Http\Middleware\EditRecipe;
+use App\Http\Controllers\adscontroller;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -43,7 +44,7 @@ Route::get('/register',function(){
 
 Route::post('/register',[acccontroller::class,'create_account'])->name('registacc');
 Route::get('/viewrecipe/{recipeid}',[recipecontroller::class,'viewparticularrecipe']
-);
+)->name('viewrecipe');
 Route::get('/login', 
     [acccontroller::class,'loginonce'])->name('login');
 Route::post('/login',[acccontroller::class,'login_account'])->name('loginacc');
@@ -54,12 +55,23 @@ Route::get('/logout',[acccontroller::class,'logout'])->name('logout');
 Route::post('/adminregist',[acccontroller::class,'createadmin'])->name('adminregist');
 Route::post('/restoregist',[acccontroller::class,'createresto'])->name('restoregist');
 Route::post('/menudashboard',[recipecontroller::class,'searchrecipe'])->name('searchrecipe');
-Route::post('/restoprofile',[acccontroller::class,'updateresto']);
+Route::post('/restoprofile',[acccontroller::class,'updaterestoprofile']);
 Route::get('/adminregist',function(){
     return view('adminregister');
 });
 Route::post('/userprofile',[acccontroller::class,'updateuserprofile']);
 Route::post('/useracc',[acccontroller::class,'upuseraccount'])->name('upuseracc');
 Route::get('/subscription',[membercontroller::class,'subscription'])->name('subscription');
-Route::post('/subscription',[membercontroller::class,'createsub'])->name('createsub');
-Route::get('/editpage/{i}',[recipecontroller::class,'recipeeditpage'])->name('editrecipe');
+Route::get('/editrecipe/{i}',[recipecontroller::class,'recipeeditpage'])->name('editrecipe');
+Route::post('/editrecipe/{i}',[recipecontroller::class,'updaterecipe'])->name('updaterecipe')->middleware(EditRecipe::class);
+Route::get('/ads',[adscontroller::class,'addashboard'])->name('addashboard');
+Route::get('/myrecipes',[recipecontroller::class,'allmyrecipes'])->name('allmyrecipes');
+Route::post('/subscription',[membercontroller::class,'subscribe'])->name('subscribe');
+Route::post('/refill',[membercontroller::class,'refillbalance'])->name('refillacc');
+Route::get('/admdonations',[donationscontroller::class,'admdonations'])->name('admdonations');
+Route::get('/admrecipes',[recipecontroller::class,'admrecipes'])->name('admrecipes');
+Route::post('/createads',[adscontroller::class,'createads'])->name('createads');
+Route::get('/deleterecipe/{id}',[recipecontroller::class,'recipedelete'])->name('deleterecipe');
+Route::get('/deletead/{id}',[adscontroller::class,'deletead'])->name('deletead');
+Route::get('/editad/{id}',[adscontroller::class,'editadview'])->name('editadview');
+Route::post('/editad/{id}',[adscontroller::class,'editad'])->name('editad');

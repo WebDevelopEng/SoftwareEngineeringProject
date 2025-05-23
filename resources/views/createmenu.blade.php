@@ -15,11 +15,20 @@ Create a recipe
     <br>
     <input type="text" style="width:100%;" placeholder="Input the name of your recipe" id="name" name="name" >
     <br>
+    <label for="category">Food Category</label>
+    <select class="form-select" name="category" id="category">
+        <option value="Seafood">Seafood</option>
+        <option value="Noodles">Noodles</option>
+        <option value="Rice">Rice</option>
+        <option value="Snacks">Snacks</option>
+    </select>
+    <br>
     <label for="description">Description:</label>
     <br>
     <textarea class="form-control" id="description" name="description" rows="4" cols="50" placeholder="Enter your description"></textarea>
     <label for="ingredients">Ingredients:</label>
     <textarea class="form-control" id="ingredients" name="ingredients" rows="4" cols="50" placeholder="Enter your ingredients"></textarea>
+    <label for="premium">Premium Setup:</label>
     <div class="form-check">
     <input class="form-check-input" type="radio"  name="premium" id="radio1" value='1'>  <label class="form-check-label" for="radio1">Premium</label></div><div class="form-check"><input class="form-check-input" type="radio"  name="premium" id="radio1" value='0'>
     <label class="form-check-label" for="radio2">Non Premium</label> </div>

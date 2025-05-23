@@ -9,14 +9,13 @@ class Recipe extends Model
     //
     protected $fillable=[
         'Name',
-        'Rating',
+        'image',
         'Description',
         'restaurant_id',
-        'premium'
+        'premium',
+        'Ingredients',
+        'category'
     ];
     protected $primaryKey='RecipeID';
 
-    public function ingredients():HasMany{
-        return $this->hasMany(ingredients::class,'Recipe_ID');
-        }
 }

@@ -1,6 +1,6 @@
 @extends('templates.headandfoot')
 @section('title')
-    Menu Dashboard
+    My Recipes
 @endsection
 @section('content')
 <script src="{{asset('viewjs/menudashboard.js')}}"></script>
@@ -19,7 +19,7 @@
 </div>
 <div style="border-width:2%;width:80%;margin:auto;">
 @if(!isset($state))
-<h2> Top Picks </h2>
+<h2> My Recipes </h2>
 @else
 <h2> Search </h2>
 @endif
@@ -29,6 +29,7 @@
     @php
       $imageurl="/storage/recipeimages/".$recipe->image;
       $recipeurl="/viewrecipe/".$recipe->RecipeID;
+      $editurl="/editrecipe/".$recipe->RecipeID;
     @endphp
   <div class="card" style="width: 18rem;min-height:300px;">
   <img style="width:100%;height:150px;object-fit:fill" src="{{$imageurl}}" alt="Card image cap"/>
@@ -38,21 +39,10 @@
     <p class="card-text">{{Str::limit($recipe->Description,25)}}</p>
   </div>
   <div style="width:fit-content">
-  @if($membership==0 and $recipe->premium==1 and null == Session::get('restaurant') )
-    <a class="btn btn-secondary disabled" href="{{$recipeurl}}" class="card-link"><i class="fa-solid fa-lock"></i>  Recipe locked</a>
-  @elseif(null == Session::get('restaurant'))
-    <a class="btn btn-dark"  href="{{$recipeurl}}" class="card-link">View recipe  <i class="fa-solid fa-arrow-right"></i></a>
-  @endif
-  @if(null !== Session::get('restaurant') and Session::get('restaurant')->id!==$recipe->restaurant_id)
-    <a class="btn btn-secondary disabled" href="{{$recipeurl}}" class="card-link"><i class="fa-solid fa-lock"></i>  Recipe locked</a>
-  @elseif(null !== Session::get('restaurant'))
-    <a class="btn btn-dark"  href="{{$recipeurl}}" class="card-link">View recipe  <i class="fa-solid fa-arrow-right"></i></a>
-  @endif
-
-
-
-
-
+    <div style="width:80%;text-align:center;font-size:0.8em;display:flex; padding">
+                    <a class="btn btn-dark" style="font-size:1em" href="{{$recipeurl}}" ><i class="fa-solid fa-eye"></i> View </a>
+                    <a class="btn btn-info" style="font-size:1em" href="{{$editurl}}" ><i class="fas fa-edit"></i> Edit </a>
+        </div>
 </div>
 </div>
 @endforeach

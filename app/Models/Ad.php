@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ad extends Model
 {
-    
-    protected $fillable=['url','description'];
-    protected $primaryKey=['id'];
+    protected $table='ads';
+    protected $fillable=['title','description','image'];
+    protected $primaryKey='id';
 }

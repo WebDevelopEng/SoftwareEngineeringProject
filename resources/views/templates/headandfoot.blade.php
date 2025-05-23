@@ -19,9 +19,8 @@
         <div class="navbar-button" style="padding-left:2%;"> DonaCook </div>
         <div><a href="{{route('menudashboard')}}"> Menus </a> </div>
         @if (Session::get('user'))
-        <div><a href="{{route('bookmarks')}}"> Bookmarks </a></div>
+        <div><a href="{{route('subscription')}}"> Subscription </a></div>
         <div><a href="{{route('donate')}}"> Donate</a></div>
-        <div><a href="{{route('restaurants')}}"> Restaurants </a> </div>
         </div>
         <div class="navigationbar-profile">
         <div><a href="{{route('profile')}}">Account</a></div>
@@ -29,15 +28,18 @@
 </div>
         @elseif(Session::get('restaurant'))
         <div><a href="{{route('recipecreation')}}">Create a Recipe</a></div>
-        <div><a href="">My Recipes</a></div>
+        <div><a href="{{route('allmyrecipes')}}">My Recipes</a></div>
+        <div><a href="{{route('donate')}}">Donations</a></div>
 </div>
         <div class="navigationbar-profile">
         <div><a href="{{route('profile')}}">Account</a></div>
         <div><a href="{{route('logout')}}">Logout</a></div>
 </div>
         @elseif(Session::get('admin'))
-        <div><a href="{{route('restaurants')}}">Restaurants</a></div>
-        </div>
+        <div><a href="{{route('addashboard')}}">Ads</a></div>
+        <div><a href="{{route('admdonations')}}">Donations</a></div>
+        <div><a href="{{route('admrecipes')}}">Recipes</a></div>
+</div>
         <div class="navigationbar-profile">
         <div><a href="{{route('profile')}}">Account</a></div>
         <div><a href="{{route('logout')}}">Logout </a></div>

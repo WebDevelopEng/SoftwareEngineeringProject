@@ -42,7 +42,7 @@
             </div>
         </div>
         <div style="width:60%;border-style:solid;border-width:2px;border-radius:5px;padding-left:2%;padding-right:2%;padding-top:5px;">
-            <div><h3>Recipe Collection:</h3><br>
+            <div><h3>Recent Recipes:</h3><br>
                 <div style="display:flex;height:auto;max-height:800px;overflow:auto;">
                 @foreach($collection as $recipe)
                     @php
@@ -55,7 +55,8 @@
                 <img style="width:100%;height:166px;object-fit:cover" src="{{$imageurl}}" alt="Card image cap"/>
                 </div>
                 <div class="card-body" style="font-size:0.8em">
-                    <b>{{$recipe->Name}}</b>
+                    <b>{{$recipe->Name}}</b><br>
+                    <div class="btn btn-info" style="font-size:0.8em">{{$recipe->category}}</div>
                     <p class="card-text">{{Str::limit($recipe->Description,25)}}</p>
                 </div>
                 <div style="width:80%;text-align:center;font-size:0.8em">
@@ -66,7 +67,6 @@
                 @endforeach
                  </div>
             </div>
-            {{$collection->links()}}
             <br><br>
             <h3>Edit Account</h3>
             <div style="min-height:200px;">
@@ -164,14 +164,31 @@
                 <button class="btn btn-dark" style="margin-bottom:50px;">Update Account</button><br>
             </form>
             </div>
+            <div> <h3> Credit </h3>
+            Balance: {{$user->balance}}
+            <br><br>
+            <h5>Refill balance</h5>
+<form method="post" action="{{route('refillacc')}}">
+<label for="refill">Refill your balance:</label><br>
+@csrf
+    <input class="form-control" type="number" name="balance" id="balance"><br>
+    <button class="btn btn-dark" type="submit">Refill</button>
+    
+    
+</form><br>
+        </div>
         </div>
     @endif
-    @if(null!==Session::get('admin'))
-     <div style="width:60%;margin:auto;height:1200px;display:flex;">
-        <div style="width:40%;">
-            <div style="width:80%;margin:auto;margin-top:2%;margin-bottom:2%;"></div>
-     </div>
-     <div style="width:60%;border-style:solid;border-width:2px;border-radius:5px;padding-left:2%;padding-right:2%;padding-top:5px;">
+
+
+    @if(null!==Session::get('admin')) 
+     <div style="width:60%;margin:auto;margin-top:2%;border-radius:2px;display:flex;align-items:stretch;">
+            <div class="accountinformation" style="text-align:center;">
+                <h5>{{$admin->username}}</h5>
+                <i class="fa-solid fa-envelope"></i>: {{$admin->email}}<br>
+                <button class="btn btn-dark" type="button" onclick="popupedit('updateresto')">Update Profile</button>
+            </div>
+    </div>
        
 </div>
 </div>

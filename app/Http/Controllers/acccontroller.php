@@ -11,6 +11,7 @@ use App\Models\admin;
 use App\Models\Recipe;
 use App\Models\member;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 class acccontroller extends Controller
 {
     //
@@ -106,7 +107,7 @@ class acccontroller extends Controller
             $extension=$req->picture->getClientOriginalExtension();
             $currenttime=now()->format('YmdHis');
             $stringformat=$string.$currentuserid.$currenttime.'.'.$extension;
-            $req->picture->storeAs('/profileimage',$stringformat,'public');
+            $req->picture->storeAs('/profileimages',$stringformat,'public');
             $profile->picture=$stringformat;
             $profile->save();
             return view('profilepage',['profile'=>$profile]);
@@ -158,7 +159,7 @@ class acccontroller extends Controller
     function viewallprofile(){
         if (Session::get('restaurant')){
         $currentresto=Session::get('restaurant');
-        $recipecollection=Recipe::where('restaurant_id','=',$currentresto->id)->paginate(8);
+        $recipecollection=Recipe::where('restaurant_id','=',$currentresto->id)->orderBy('updated_at')->take(4)->get();
         return view('profilepage',['collection'=>$recipecollection]);
         }
         if(Session::get('user')){
@@ -169,7 +170,7 @@ class acccontroller extends Controller
         }
         if(Session::get('admin')){
             $currentadmin=Session::get('admin');
-            return view('profilepage');
+            return view('profilepage',['admin'=>$currentadmin]);
         }
     }
     function updaterestoprofile(Request $req){
@@ -186,6 +187,7 @@ class acccontroller extends Controller
   ]);
     
     if($req->image!=null){
+        Storage::disk('public')->delete('profileimages/'.$resto->image);
             $extension=$req->image->getClientOriginalExtension();
             $currenttime=now()->format('YmdHis');
             $stringformat='rest'.$currenttime.'.'.$extension;
@@ -212,14 +214,14 @@ class acccontroller extends Controller
         $req->validate([
             'name'=>'required|max:50',
             'dob'=>'required|date',
-            'image'=>'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'image'=>'nullable|image|mimes:jpeg,png,jpg,svg|max:2048'
         ],
     ['dob.required'=>"You must input your date of birth.",
     'name.max'=>"Username is too long. Please use a shorter username",
     'name.required'=>"Please enter a name."
   ]);
-    
     if($req->image!=null){
+            Storage::disk('public')->delete('profileimages/'.$user->profilepicture);
             $extension=$req->image->getClientOriginalExtension();
             $currenttime=now()->format('YmdHis');
             $stringformat='use'.$currenttime.'.'.$extension;

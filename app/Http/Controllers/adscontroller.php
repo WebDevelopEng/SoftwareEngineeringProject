@@ -3,26 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Ad;
+use Illuminate\Support\Facades\Storage;
 class adscontroller extends Controller
 {
     //
-    function createads(){
+    function createads(Request $req){
         $req->validate([
-            'url' => 'required',
-            'description' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'title' => 'required',
+            'description' => 'required|max:50',
+            'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
         
         $ad=new Ad;
-        $ad->url=$req->url;
+        $ad->title=$req->title;
         $ad->description=$req->description;
         if($req->image!=null){
             $extension=$req->image->getClientOriginalExtension();
-            $currenttime=now()->format('Ymd');
-            $stringformat=$currentrestaurant.$currenttime.'.'.$extension;
-            $req->image->storeAs('/adsimages',$stringformat,'public');
-            $recipe->image=$stringformat;
+            $currenttime=now()->format('YmdHis');
+            $stringformat="adm".$currenttime.'.'.$extension;
+            $req->image->storeAs('advertimages',$stringformat,'public');
+            $ad->image=$stringformat;
         }
         $ad->save();
         return redirect('/ads');
@@ -31,25 +32,24 @@ class adscontroller extends Controller
         $ads=Ad::all();
         return view('ads', ['ads'=>$ads]);
     }
-    function queueads(){
-        $ads=Ad::where('status', 'queued')->get();
-        return view('ads', ['ads'=>$ads]);
-    }
-    function modifyads(){
+    function editad(Request $req, $adid){
         $req->validate([
-            'id'=>'required',
-            'url'=>'required',
-            'description'=>'required'
+            'title'=>'required',
+            'description'=>'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
-        $ad=Ad::find($req->id);
-        if($ad){
-            $ad->url=$req->url;
+        $ad=Ad::find($adid);
+        if($req->image!=null){
+            $extension=$req->image->getClientOriginalExtension();
+            $currenttime=now()->format('YmdHis');
+            $stringformat="adm".$currenttime.'.'.$extension;
+            $req->image->storeAs('advertimages',$stringformat,'public');
+            $ad->image=$stringformat;
+        }
+            $ad->title=$req->title;
             $ad->description=$req->description;
             $ad->save();
-        }
-        else{
-            return redirect('/ads',['error1','Ad not found']);
-        }
+            return redirect('/ads');
     }
     function approveads(){
         $req->validate([
@@ -67,5 +67,19 @@ class adscontroller extends Controller
     function displayads(){
         $ads=Ad::where('status', 'approved')->get();
     }
-
+    function addashboard(){
+        $ads=Ad::paginate(5);
+        return view('addashboard',['ads' => $ads]);
+    }
+    function editadview(Request $req,$adid){
+        $ads=Ad::find($adid);
+        return view('editad',['ad'=>$ads]);
+    }
+    function deletead(Request $req, $adid){
+        $ad=Ad::find($adid);
+       if($ad->image!=null){
+        Storage::disk('public')->delete('/advertimages/'.$ad->image);}
+        $ad->delete();
+        return redirect(route('addashboard'));
+    }
 }
