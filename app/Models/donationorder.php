@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class admin extends Model
+class donationorder extends Model
 {
     //
-    protected $fillable=['username','password','email'];
+    protected $fillable=['userid','cost','donationid'];
     protected $primaryKey='id';
 }

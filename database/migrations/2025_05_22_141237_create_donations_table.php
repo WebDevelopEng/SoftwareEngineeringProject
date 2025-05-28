@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('restaurant_id');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
+            $table->string('name');
+            $table->float('price');
+            $table->string('description');
+            $table->string('image');
+            $table->integer('count');
             $table->timestamps();
         });
     }

@@ -70,7 +70,7 @@
             <br><br>
             <h3>Edit Account</h3>
             <div style="min-height:200px;">
-            <form method="post" action="{{route('upuseracc')}}">
+            <form method="post" action="{{route('uprestoacc')}}">
                 @csrf
                 <label for="email">Change Email: </label>
                 <input class="form-control"  type="text" name="email" value="{{$restaurant->restaurantEmail}}" id="email">
@@ -182,12 +182,40 @@
 
 
     @if(null!==Session::get('admin')) 
-     <div style="width:60%;margin:auto;margin-top:2%;border-radius:2px;display:flex;align-items:stretch;">
+    @php
+        $imageurl=asset('profileimage/defaultimage.jpg');
+    @endphp
+     <div style="width:60%;margin:auto;margin-top:2%;border-radius:2px;display:flex;align-items:stretch;border-style:solid;border-width:1px;padding:1%;">
+        <div style="width:80%;margin:auto;margin-top:2%;margin-bottom:2%;text-align:center;"><img src="{{$imageurl}}" style="height:200px;width:200px;">
             <div class="accountinformation" style="text-align:center;">
                 <h5>{{$admin->username}}</h5>
-                <i class="fa-solid fa-envelope"></i>: {{$admin->email}}<br>
-                <button class="btn btn-dark" type="button" onclick="popupedit('updateresto')">Update Profile</button>
+                <i class="fa-solid fa-envelope"></i>: {{$admin->email}}<br><br>
+                
+                <div style="text-align:left;">
+                <form method="post" action="{{route('upadminprofile')}}">
+                    <h5>Update Profile:</h5>
+                    @csrf
+                    Name:<br>
+                    <input class="form-control" type="text" method="post" name="name" value="{{$admin->name}}"><br>
+                    <button class="btn btn-dark"> Update Profile</button>
+                    <br><br>
+                </form>
+    </div>
+                <div style="text-align:left;border-top:double;">
+                <h5>Update Account:</h5>
+                <form method="post" action="{{route('upadminacc')}}">
+                    @csrf
+                   
+                    Email:<br>
+                    <input class="form-control" type="text" method="post" name="email" value="{{$admin->email}}"><br>
+                    Password:<br>
+                    <input class="form-control" type="password" method="post" name="password"><br>
+                    <button class="btn btn-dark">Update Account</button>
+                    </div>
+                </form>
             </div>
+    <div>
+    
     </div>
        
 </div>

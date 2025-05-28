@@ -21,6 +21,7 @@
         @if (Session::get('user'))
         <div><a href="{{route('subscription')}}"> Subscription </a></div>
         <div><a href="{{route('donate')}}"> Donate</a></div>
+        <div><a href="{{route('viewtransaction')}}"> Transaction </a></div>
         </div>
         <div class="navigationbar-profile">
         <div><a href="{{route('profile')}}">Account</a></div>
@@ -37,7 +38,7 @@
 </div>
         @elseif(Session::get('admin'))
         <div><a href="{{route('addashboard')}}">Ads</a></div>
-        <div><a href="{{route('admdonations')}}">Donations</a></div>
+        <div><a href="{{route('donate')}}">Donations</a></div>
         <div><a href="{{route('admrecipes')}}">Recipes</a></div>
 </div>
         <div class="navigationbar-profile">

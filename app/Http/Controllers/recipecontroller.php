@@ -145,6 +145,6 @@ class recipecontroller extends Controller
     }
     function admrecipes(Request $req){
         $allrecipes=Recipe::paginate(20);
-        return view('admrecipes',['collection'=>$allrecipes]);
+        return view('admrecipes',['recipes'=>$allrecipes]);
     }
 }

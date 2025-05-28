@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Recipe extends Model
 {
     //
@@ -17,5 +18,8 @@ class Recipe extends Model
         'category'
     ];
     protected $primaryKey='RecipeID';
-
+    public function restaurant(): BelongsTo
+    {
+        return $this->belongsTo(Restaurant::class);
+    }
 }

@@ -249,5 +249,43 @@ class acccontroller extends Controller
     session(['user'=>$user]);
     return redirect('/profile');
 }
+function uprestoacc(Request $req){
+    $restoid=Session::get('restaurant')->id;
+    $restaurant=Restaurant::find($restoid);
+    $req->validate([
+        'email'=>'email|required|unique:restaurants,email,'.$restoid,
+        'password'=>'required',
+    ]);
+    $restaurant->email=$req->email;
+    $restaurant->password=$req->password;
+    $restaurant->save();
+    session(['restaurant'=>$restaurant]);
+    return redirect('/profile');
+}
+function upadminacc(Request $req){
+    $adminid=Session::get('admin')->id;
+    $admin=admin::find($adminid);
+    $req->validate([
+        'email'=>'email|required|unique:admins,email,'.$adminid,
+        'password'=>'required',
+    ]);
+    $admin->email=$req->email;
+    $admin->password=$req->password;
+    $admin->save();
+    session(['admin'=>$admin]);
+    return redirect('/profile');
+}
+function updateadminprofile(Request $req){
+    $adminid=Session::get('admin')->id;
+    $admin=admin::find($adminid);
+    $req->validate([
+        'name'=>'required'
+    ]);
+    $admin->username=$req->name;
+    $admin->save();
+    session(['admin'=>$admin]);
+    return redirect('/profile');
+
+}
 }
 
