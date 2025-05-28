@@ -42,6 +42,7 @@
     <div style="width:80%;text-align:center;font-size:0.8em;display:flex; padding">
                     <a class="btn btn-dark" style="font-size:1em" href="{{$recipeurl}}" ><i class="fa-solid fa-eye"></i> View </a>
                     <a class="btn btn-info" style="font-size:1em" href="{{$editurl}}" ><i class="fas fa-edit"></i> Edit </a>
+                    <a class="btn btn-danger" style="font-size:1em" href="{{route('deleterecipe',['id'=>$recipe->RecipeID])}}">Delete</a>
         </div>
 </div>
 </div>
