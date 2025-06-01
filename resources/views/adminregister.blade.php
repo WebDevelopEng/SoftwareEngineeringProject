@@ -3,8 +3,18 @@
 Admin Register
 @endsection
 @section('content')
+
 <div style="margin:auto;width:80%;text-align:left;margin-top:2%; border-style:solid; border-width:1px;padding:5%;">
     <h3>Admin Registration</h3>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <form method="post" action="{{route('adminregist')}}" id="form">
         @csrf
     <label for="username">Enter your username:</label><br>

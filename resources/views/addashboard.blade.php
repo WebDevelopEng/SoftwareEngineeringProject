@@ -34,6 +34,15 @@ Ad Management
 <div style="width:40%;border-style:solid;border-color:black;border-width:1px;padding-top:1%;padding-bottom:1%;">
 <div style="width:80%;margin:auto;">
 <h5>Create New Ad</h5>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <form method="post" action="{{route('createads')}}" enctype="multipart/form-data">
 @csrf
 <label for="title">Title:</label>
