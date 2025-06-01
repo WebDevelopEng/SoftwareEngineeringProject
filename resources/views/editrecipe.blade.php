@@ -12,6 +12,15 @@
     <div style="width:80%;margin:auto">
 
     <h3 style="padding-top:3%;padding-bottom:3%">Edit Recipe</h3>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <form method="post" action="{{route('updaterecipe',['i' => $recipe->RecipeID])}}" enctype="multipart/form-data">
         @csrf
     <label for="name">Recipe Name:</label>

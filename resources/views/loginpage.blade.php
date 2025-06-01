@@ -8,6 +8,15 @@ Login
 <form method="post" action="{{route('loginacc')}}" id="form">
     @csrf
 <h3>Login</h3>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <button type="button" class="btn btn-primary" style="width:100px" onclick="logintype('userselection')" id="userselection" >User</button>
 <button type="button" class="btn btn-secondary"  style="width:100px" onclick="logintype('adminselection')" id="adminselection" >Admin</button>
 <button type="button" class="btn btn-secondary" style="width:100px" onclick="logintype('restoselection')" id="restoselection" >Restaurant</button><br>

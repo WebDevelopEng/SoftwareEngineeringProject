@@ -11,6 +11,15 @@
         $imageurl='/storage/donationimages/'.$donation->image;
     @endphp
     <h3>Edit Donation</h3>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     
     <form method="post" action="{{route('editdonation',['id'=>$donation->id])}}" enctype="multipart/form-data">
         @csrf

@@ -13,6 +13,15 @@
         $imageurl='/storage/advertimages/'.$ad->image;
     @endphp
     <h3>Edit Ad</h3>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     
     <form method="post" action="{{route('editad',['id'=>$ad->id])}}" enctype="multipart/form-data">
         @csrf

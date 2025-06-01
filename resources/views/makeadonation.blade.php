@@ -36,9 +36,15 @@
                                     <p class="card-text mb-2">Stock: <span class="fw-bold">{{ $donation->count }}</span></p>
 
                                     <div class="mt-auto"> 
+                                        @if($donation->count > 0)
                                         <a href="{{ route('viewdonation', $donation->id) }}" class="btn btn-dark">
                                             View Details
                                         </a>
+                                        @else
+                                        <button class="btn btn-dark" disabled>
+                                            View Details
+                                        </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

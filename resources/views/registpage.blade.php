@@ -6,6 +6,15 @@ Registration
 <script src="{{asset('viewjs/registration.js')}}"></script>
 <div style="margin:auto;width:80%;text-align:left;margin-top:2%; border-style:solid; border-width:1px;padding:5%;">
     <h3>Registration</h3>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <form method="post" action="{{route('registacc')}}" id="form">
         @csrf
     <button type="button" class="btn btn-primary" style="width:100px" onclick="registtype('userselection')" id="userselection" >User</button>

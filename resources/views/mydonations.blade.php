@@ -13,7 +13,15 @@
     </div>
 
     <hr>
-
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="card shadow-sm">
         <div class="card-header bg-dark text-white">
             <h4 class="mb-0">Current Donations</h4>

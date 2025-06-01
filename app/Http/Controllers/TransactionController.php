@@ -71,9 +71,22 @@ class TransactionController extends Controller
     }
     function confirmtransaction(Request $req){
         $user=User::find(session('user')->id);
+        
+        $transaction=Transaction::find($req->transactionid);
+        foreach($transaction->items as $item){
+            if($item->donation->count >= $item->quantity){
+            }
+            else{
+                return redirect()->route('viewtransaction')->withErrors(['stock' => 'Stock is not available for '.$item->donation->name]);
+            }
+
+        }
+        foreach($transaction->items as $item){
+            $item->donation->count=$item->donation->count-$item->quantity;
+            $item->donation->save();
+        }
         $user->balance=$user->balance-$req->totalcost;
         $user->save();
-        $transaction=Transaction::find($req->transactionid);
         $transaction->status="completed";
         $transaction->save();
         session(['user'=>$user]);
