@@ -115,8 +115,16 @@ class recipecontroller extends Controller
         if(Session::get('user')!=null){
         $collection2=member::where('memberId','=',Session::get('user')->id)->where('membershipDueDate','>=',Carbon::now()->format('Y-m-d'))->first();
         if($collection2!=null){
+            $receivingrestaurant->balance=$receivingrestaurant->balance+50;
+            if($recipe->premium=True){
+                $receivingrestaurant->balance=$receivingrestaurant->balance+70;
+            }
+            $receivingrestaurant->save();
             return view('menupage',['recipe'=>$recipe,'restaurant'=>$receivingrestaurant,'ad'=>null]);
         }
+        }
+        if(Session::get('admin')!=null){
+            return view('menupage',['recipe'=>$recipe,'restaurant'=>$receivingrestaurant,'ad'=>null]);
         }
         $receivingrestaurant->balance=$receivingrestaurant->balance+50;
         $receivingrestaurant->save();   // ini untuk pendapatan ads dari suatu akses sebuah resep.
