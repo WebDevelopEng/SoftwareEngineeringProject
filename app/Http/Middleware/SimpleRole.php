@@ -6,22 +6,19 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Session;
-class EditRecipe
+class SimpleRole
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $req, Closure $next): Response
+    public function handle(Request $request, Closure $next, $role): Response
     {
-        if($req->restaurant_id!=null){
-        if($req->restaurant_id == Session::get('restaurant')->id || null !== Session::get('admin')){ 
-        return $next($req);
-        }
+        if(Session::get($role)){
+        return $next($request);}
         else{
             return abort(403);
         }
     }
-}
 }
