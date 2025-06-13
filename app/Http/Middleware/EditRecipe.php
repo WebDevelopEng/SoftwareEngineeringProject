@@ -16,11 +16,20 @@ class EditRecipe
     public function handle(Request $req, Closure $next): Response
     {
         if($req->restaurant_id!=null){
-        if($req->restaurant_id == Session::get('restaurant')->id || null !== Session::get('admin')){ 
+        if(Session::get('restaurant')){
+        if($req->restaurant_id == Session::get('restaurant')->id){ 
         return $next($req);
         }
         else{
             return abort(403);
+        }}
+        else{
+            if(null !== Session::get('admin')){
+                return $next($req);
+            }
+            else{
+                return abort(403);
+            }
         }
     }
 }

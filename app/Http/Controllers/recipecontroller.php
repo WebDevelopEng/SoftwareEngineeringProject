@@ -20,7 +20,7 @@ class recipecontroller extends Controller
                 'description'=>'required|string',
                 'ingredients'=>'required|string',
                 'premium'=>'required',
-                'image'=>'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
+                'image'=>'required|image|mimes:jpeg,png,jpg,svg|max:2048',
                 'category'=>'required'
             ]
             );
@@ -65,7 +65,7 @@ class recipecontroller extends Controller
                 'description'=>'required',
                 'ingredients'=>'required',
                 'premium'=>'required',
-                'image'=>'nullable|image|mimes:jpeg,png,jpg,svg|max:2048'
+                'image'=>'required|image|mimes:jpeg,png,jpg,svg|max:2048'
             ]
             );
         $currentrestaurant=session('restaurant')->id;
@@ -140,7 +140,7 @@ class recipecontroller extends Controller
         Storage::disk('public')->delete('/recipeimages/'.$currentrecipe->image);}
         $currentrecipe->delete();
         if(Session::get('admin')!=null){
-        return redirect('admindashboard');
+        return redirect('admrecipes');
         }
         else{
             return redirect(route('allmyrecipes'));
