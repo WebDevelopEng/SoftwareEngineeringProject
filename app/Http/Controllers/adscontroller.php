@@ -51,19 +51,6 @@ class adscontroller extends Controller
             $ad->save();
             return redirect('/ads');
     }
-    function approveads(){
-        $req->validate([
-            'id'=>'required'
-        ]);
-        $ad=Ad::find($req->id);
-        if($ad){
-            $ad->status='approved';
-            $ad->save();
-        }
-        else{
-            return redirect('/ads',['error1','Ad not found']);
-        }
-    }
     function displayads(){
         $ads=Ad::where('status', 'approved')->get();
     }

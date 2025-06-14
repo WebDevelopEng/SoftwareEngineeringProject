@@ -92,6 +92,6 @@ Route::post('/deletetransaction',[TransactionController::class,'deletetransactio
 Route::post('/confirmtransaction',[TransactionController::class,'confirmtransaction'])->name('confirmtransaction')->middleware(SimpleRole::class.':user');
 Route::get('/editdonation/{id}',[DonationController::class,'editdonationview'])->name('editdonationview')->middleware(ViewEditRecipeandDonations::class.':donation');
 Route::post('/editdonation/{id}',[DonationController::class,'editdonation'])->name('editdonation')->middleware(ViewEditRecipeandDonations::class.':donation');
-Route::post('/restoacc',[acccontroller::class,'uprestoacc'])->name('uprestoacc')->middleware(SimpleRole::class.':admin');
+Route::post('/restoacc',[acccontroller::class,'uprestoacc'])->name('uprestoacc')->middleware(SimpleRole::class.':restaurant');
 Route::post('/adminacc',[acccontroller::class,'upadminacc'])->name('upadminacc')->middleware(SimpleRole::class.':admin');
 Route::post('/adminprofile',[acccontroller::class,'updateadminprofile'])->name('upadminprofile')->middleware(SimpleRole::class.':admin');

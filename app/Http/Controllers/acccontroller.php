@@ -253,10 +253,10 @@ function uprestoacc(Request $req){
     $restoid=Session::get('restaurant')->id;
     $restaurant=Restaurant::find($restoid);
     $req->validate([
-        'email'=>'email|required|unique:restaurants,email,'.$restoid,
+        'email'=>'email|required|unique:restaurants,restaurantEmail,'.$restoid,
         'password'=>'required',
     ]);
-    $restaurant->email=$req->email;
+    $restaurant->restaurantEmail=$req->email;
     $restaurant->password=$req->password;
     $restaurant->save();
     session(['restaurant'=>$restaurant]);
@@ -288,4 +288,5 @@ function updateadminprofile(Request $req){
 
 }
 }
+
 

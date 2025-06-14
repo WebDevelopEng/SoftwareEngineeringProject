@@ -36,7 +36,7 @@ class membercontroller extends Controller
         return redirect(route('profile'));
         }
         else{
-            return view('/subscription',['error1','Insufficient balance']);
+            return view('subscription',['error1','Insufficient balance']);
         }
     }
     function refillbalance(Request $req){
