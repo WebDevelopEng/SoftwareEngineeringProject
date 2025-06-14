@@ -4,29 +4,33 @@ Login
 @endsection
 @section('content')
 <script src="{{asset('/viewjs/loginpage.js')}}"></script>
-<div style="margin:auto;width:80%;text-align:center;margin-top:10%; border-style:solid; border-width:1px;padding:5%;">
-<form method="post" action="{{route('loginacc')}}" id="form">
-    @csrf
-<h3>Login</h3>
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+<link href="{{asset('viewcss/login.css')}}" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<body style="background-color: rgba(255,235,205,1)">
+<div class="login-card">
+    <form method="post" action="{{route('loginacc')}}" id="form" class="login-form">
+        @csrf
+        <h3 class="login-title" style="margin:0">Welcome to DonaCook!</h3>
+        <p class="login-title">Please LOGIN to your own account!</p>
+        <div class="login-tabs">
+            <button type="button" class="login-tab" onclick="logintype('userselection')" id="userselection">User</button>
+            <button type="button" class="login-tab" onclick="logintype('adminselection')" id="adminselection">Admin</button>
+            <button type="button" class="login-tab" onclick="logintype('restoselection')" id="restoselection">Restaurant</button>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password">
+        </div>
+        <input type="text" style="display:none" name="hidden" id="hidden" value="userselection">
+        <button type="submit" class="btn-submit">Login</button>
+    </form>
+    <div class="register-link">
+        No account yet? <a href="{{route('register')}}">Register now!</a>
     </div>
-@endif
-<button type="button" class="btn btn-primary" style="width:100px" onclick="logintype('userselection')" id="userselection" >User</button>
-<button type="button" class="btn btn-secondary"  style="width:100px" onclick="logintype('adminselection')" id="adminselection" >Admin</button>
-<button type="button" class="btn btn-secondary" style="width:100px" onclick="logintype('restoselection')" id="restoselection" >Restaurant</button><br>
-<label for="email">Enter your email:</label><br>
-<input type="email" id="email" name="email"><br>
-<label for="password">Enter your password:</label><br>
-<input type="password" id="password" name="password"><br><br>
-<input type="text" style="display:none" name="hidden" id="hidden" value="userselection">
-<input type="submit">
-</form>
-<a href="{{route('register')}}">No account yet? Register now !</a>
 </div>
+</body>
 @endsection
