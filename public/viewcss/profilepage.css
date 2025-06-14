@@ -1,3 +1,157 @@
-.accountinformation{
-    text-align:center;
+.profile-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 80%;
+    margin: 2rem auto;
+}
+
+.profile-left, .profile-right {
+    flex: 1;
+    min-width: 300px;
+}
+
+.profile-card {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    width: 100%;
+}
+
+.admin-container {
+    width: 60%;
+    margin: 2rem auto;
+}
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 1rem;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.accountinformation {
+    font-size: 0.95rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.accountinformation h5 {
+    color: #2c3e50;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.accountinformation i {
+    margin-right: 5px;
+    color: #f1c40f;
+}
+
+.btn-dark,
+.btn-info {
+    border-radius: 30px;
+    font-weight: 600;
+    padding: 8px 18px;
+    transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+    background-color: #f1c40f;
+    color: #2c3e50;
+    transform: translateY(-2px);
+}
+
+.btn-info:hover {
+    opacity: 0.9;
+}
+
+form label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-top: 10px;
+}
+
+form input.form-control {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.recipe-scroll {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 400px;
+    overflow-y: auto;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.recipe-card {
+    width: 12rem;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.recipe-card:hover {
+    transform: translateY(-4px);
+}
+
+.recipe-card .card-img-top {
+    height: 166px;
+    object-fit: cover;
+}
+
+.recipe-card .card-body {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.recipe-card .card-footer {
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 0.5rem;
+}
+
+.popup-card {
+    position: absolute;
+    width: 50%;
+    display: none;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    z-index: 3;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    background-image: linear-gradient(to bottom right, #fdfdfd, #f1f1f1);
+}
+
+.popup-card .btn-close-top {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+@media (max-width: 768px) {
+    .profile-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+    .admin-container {
+        width: 90%;
+    }
+    .popup-card {
+        width: 90%;
+    }
 }

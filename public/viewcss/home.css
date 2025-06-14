@@ -1,0 +1,253 @@
+#headlines{
+    padding: 100px;
+    border-radius: 20px;
+    width: 90%;
+}
+
+#translucent-card{
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 15px; 
+    max-width: 90%;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    justify-content: center;
+}
+
+#translucent-card .card-body{
+    color: #2c3e50;
+    text-align: center;
+}
+
+.btn-explore {
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-explore:hover {
+    background-color: #f1c40f;
+    color: #2c3e50;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.btn-explore:active {
+    transform: translateY(1px);
+}
+
+.btn-explore::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255,255,255,0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1,1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.btn-explore:focus:not(:active)::after {
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0,0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20,20);
+        opacity: 0;
+    }
+}
+
+.profile-card {
+    border-radius: 30px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+}
+
+.profile-card .card-img-top {
+    height: 300px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.profile-card .btn-primary {
+    background-color: #2c3e50;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.profile-card .btn-primary:hover {
+    background-color: #f1c40f;
+    color: #2c3e50;
+}
+
+.card-spacing {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px;
+}
+
+.container-title{
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+#recipeCarousel .carousel-item {
+    text-align: center;
+}
+
+#recipeCarousel .carousel-item .card {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+#recipeCarousel .card-img-top {
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+#recipes{
+    margin-bottom: 50px;
+}
+
+#recipeCarousel .carousel-control-prev,
+#recipeCarousel .carousel-control-next {
+    width: 40px;
+    height: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 0;
+}
+
+#recipeCarousel .carousel-control-prev-icon,
+#recipeCarousel .carousel-control-next-icon {
+    width: 15px;
+    height: 15px;
+    background-size: 100% 100%;
+}
+
+#impact-stats {
+    padding: 40px 20px;
+    background-color: whitesmoke;
+    transform: skewY(-3deg);
+    margin: 60px 0;
+    position: relative;
+    z-index: 1;
+}
+
+#impact-stats > .row {
+    transform: skewY(3deg);
+}
+
+.stats-icon {
+    width: 70px;
+    height: auto;
+}
+
+.stat-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #f39c12;
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.impact-side-card-container {
+    position: relative;
+    margin-top: -380px;
+    margin-left: auto;
+    margin-right: 6.5%;
+    width: 450px;
+    height: auto;
+    z-index: 2;
+    margin-bottom: 12rem;
+}
+
+.impact-side-card {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.impact-side-card:hover {
+    transform: translateY(-5px);
+}
+
+.impact-side-card h5 {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.impact-side-card p {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+
+.membership-banner {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 80%;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 3rem auto;
+}
+
+.membership-banner:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+.membership-banner .overlay {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 2.5rem 3rem;
+    border-radius: 20px;
+    text-align: center;
+    color: #2c3e50;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.membership-banner .overlay h2 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.membership-banner .overlay p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
