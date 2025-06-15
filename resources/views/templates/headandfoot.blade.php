@@ -31,21 +31,33 @@
 
                                 @if (Session::get('user'))
                                 <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('bookmarks') }}">Bookmarks</a>
+                                        <a class="nav-link" href="{{ route('subscription') }}">Subscription</a>
                                 </li>
                                 <li class="nav-item">
                                         <a class="nav-link" href="{{ route('donate') }}">Donate</a>
                                 </li>
                                 <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('restaurants') }}">Restaurants</a>
+                                        <a class="nav-link" href="{{ route('viewtransaction') }}">Cart</a>
                                 </li>
                                 @elseif (Session::get('restaurant'))
                                 <li class="nav-item">
                                         <a class="nav-link" href="{{ route('recipecreation') }}">Create a Recipe</a>
                                 </li>
+                                <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('allmyrecipes') }}">My Recipes</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('searchdonations') }}">Donations</a>
+                                </li>
                                 @elseif (Session::get('admin'))
                                 <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('restaurants') }}">Restaurants</a>
+                                        <a class="nav-link" href="{{ route('addashboard') }}">Ads</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('donate') }}">Donations</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('admrecipes') }}">Edit Recipes</a>
                                 </li>
                                 @endif
                         </ul>
