@@ -12,11 +12,7 @@ use App\Http\Middleware\ViewEditRecipeandDonations;
 use App\Http\Middleware\SimpleRole;
 use App\Http\Middleware\DeleteRecipe;
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/landingpage',function(){
-    return view('landingpage');
+    return view('homepage');
 });
 
 Route::get('/homepage',function(){
@@ -34,9 +30,6 @@ Route::get('/contactus',function(){
 Route::get('/menu',function(){
     return view('menupage');
 })->name('menu');
-
-Route::get('/bookmarks',function(){
-})->name('bookmarks');
 
 Route::get('/donate',function(){
 })->name('donate');
