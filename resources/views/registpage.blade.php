@@ -4,7 +4,7 @@ Registration
 @endsection
 @section('content')
 <script src="{{asset('viewjs/registration.js')}}"></script>
-<link href="{{asset('viewcss/login.css')}}" rel="stylesheet">
+<link href="{{asset('viewcss/login-register.css')}}" rel="stylesheet">
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 <body style="background-color: rgba(255,235,205,1)">
 <div class="login-card">

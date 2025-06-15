@@ -3,27 +3,36 @@
 Admin Register
 @endsection
 @section('content')
-
-<div style="margin:auto;width:80%;text-align:left;margin-top:2%; border-style:solid; border-width:1px;padding:5%;">
-    <h3>Admin Registration</h3>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+<link href="{{asset('viewcss/login-register.css')}}" rel="stylesheet">
+<body style="background-color: rgba(255,235,205,1)">
+    <div class="login-card">
+        <form method="post" action="{{route('adminregist')}}" id="form" class="login-form">
+            @csrf
+            <h3 class="login-title" style="margin:0">Admin Registration</h3>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <div class="form-group">
+                <label for="username">Enter your username:</label>
+                <input type="text" class="form-control" id="username" name="name" placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password">
+            </div>
+            {{--<input class="btn btn-success" type="submit" id="submit" name="submit">--}}
+            <button type="submit" class="btn-submit">Register</button>
+        </form>
     </div>
-@endif
-    <form method="post" action="{{route('adminregist')}}" id="form">
-        @csrf
-    <label for="username">Enter your username:</label><br>
-    <input type="text" class="form-control" id="username" name="name"> <br>
-    <label for="email"> Enter your email:</label><br>
-    <input type="email" class="form-control" id="email" name="email"><br>
-    <label for="password"  id="password"> Enter your password:</label><br>
-    <input type="password" class="form-control" id="password" name="password"><br>
-    <input class="btn btn-success" type="submit" id="submit" name="submit"><br>
-</form>
-</div>
+</body>
 @endsection
