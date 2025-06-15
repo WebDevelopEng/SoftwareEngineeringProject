@@ -23,9 +23,9 @@ Route::get('/homepage',function(){
     return view('homepage');
 })->name('homepage');
 
-Route::get('/homepage',function(){
-    return view('homepage');
-})->name('homepage');
+Route::get('/aboutus',function(){
+    return view('aboutus');
+})->name('aboutus');
 
 Route::get('/contactus',function(){
     return view('contactus');
