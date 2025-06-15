@@ -21,7 +21,15 @@ Route::get('/landingpage',function(){
 
 Route::get('/homepage',function(){
     return view('homepage');
-});
+})->name('homepage');
+
+Route::get('/homepage',function(){
+    return view('homepage');
+})->name('homepage');
+
+Route::get('/contactus',function(){
+    return view('contactus');
+})->name('contactus');
 
 Route::get('/menu',function(){
     return view('menupage');
