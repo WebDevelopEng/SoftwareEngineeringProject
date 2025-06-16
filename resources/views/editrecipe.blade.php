@@ -47,15 +47,11 @@
                 <textarea class="form-control" id="ingredients" name="ingredients" rows="4" placeholder="Enter your ingredients">{{ $recipe->Ingredients }}</textarea>
             </div>
             <div class="form-group">
-                <p>Premium Setup:</p>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="premium" id="radio1" value="1" {{ $recipe->premium == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="radio1">Premium</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="premium" id="radio2" value="0" {{ $recipe->premium == 0 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="radio2">Non Premium</label>
-                </div>
+                <label for="category">Premium Setup:</label>
+                <select class="form-select" name="premium" id="premium">
+                    <option value="1" {{ $recipe->premium == 1 ? 'checked' : '' }}>Premium</option>
+                    <option value="0" {{ $recipe->premium == 0 ? 'checked' : '' }}>Non Premium</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="imageupload">Upload Image:</label>
