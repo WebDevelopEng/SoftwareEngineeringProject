@@ -1,0 +1,135 @@
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        background-color: blanchedalmond; 
+        color: #2c3e50; 
+        line-height: 1.6;
+    }
+    
+    .form-container {
+        width: 60%;
+        margin: 40px auto;
+        background: #fff;
+        border: 2px solid #2c3e50;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(44, 62, 80, 0.3);
+        padding: 20px 40px 40px 40px;
+    }
+    
+    .form-container h3 {
+        text-align: center;
+        color: #2c3e50;
+        padding: 20px 0;
+        border-bottom: 2px solid #f1c40f;
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        margin-top: 15px;
+        display: block;
+        color: #2c3e50;
+    }
+    
+    .form-group input[type="text"],
+    .form-group input[type="file"],
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 8px;
+        border: 1px solid #2c3e50;
+        border-radius: 5px;
+        font-size: 1rem;
+        background-color: blanchedalmond;
+    }
+    
+    .form-group textarea {
+        resize: vertical;
+    }
+    
+    .form-check {
+        margin-top: 15px;
+    }
+    
+    .form-check-input {
+        margin-right: 10px;
+    }
+    
+    .form-check-label {
+        font-size: 1rem;
+        color: #2c3e50;
+    }
+
+    .img-preview {
+        display: block;
+        width: 50%;
+        margin: 15px auto;
+        border: 1px solid #2c3e50;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+    
+    /* ---------------------------------------------------
+       Button Styling
+    --------------------------------------------------- */
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-top: 20px;
+        margin-right: 5px;
+    }
+    
+    .btn-success {
+        background-color: #f1c40f;
+        color: #2c3e50;
+    }
+    
+    .btn-success:hover {
+        background-color: #d4ac0d;
+    }
+    
+    .btn-danger {
+        background-color: #2c3e50;
+        color: #f1c40f;
+    }
+    
+    .btn-danger:hover {
+        background-color: #1f2d3a;
+    }
+
+    .alert {
+        padding: 15px;
+        background-color: #f1c40f;
+        color: #2c3e50;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    
+    .alert ul {
+        list-style: none;
+    }
+
+    @media (max-width: 768px) {
+        .form-container {
+            width: 95%;
+            margin: 20px auto;
+            padding: 20px;
+        }
+    
+        .img-preview {
+            width: 80%;
+        }
+    }

@@ -3,7 +3,7 @@
 @section('title', 'Available Donations')
 
 @section('content')
-
+<link href="{{ asset('viewcss/makedonation.css') }}" rel="stylesheet">
 <div class="container my-4">
     <h3 class="mb-3">Available Donations</h3>
     <form action="{{ route('searchdonations') }}" method="post" class="mb-3">
@@ -14,7 +14,7 @@
         </div>
     </form>
     @if($donations->isEmpty())
-        <p class="text-center ">No donations available.</p>
+        <p class="text-center">No donations available.</p>
     @else
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach($donations as $donation)
@@ -34,16 +34,16 @@
                                     <p class="card-text text-muted mb-2"><strong>Price:</strong> Rp. {{ number_format($donation->price) }}</p>
                                     <p class="card-text mb-2">{{ Str::limit($donation->description, 70) }}</p>
                                     <p class="card-text mb-2">Stock: <span class="fw-bold">{{ $donation->count }}</span></p>
-
+    
                                     <div class="mt-auto"> 
                                         @if($donation->count > 0)
-                                        <a href="{{ route('viewdonation', $donation->id) }}" class="btn btn-dark">
-                                            View Details
-                                        </a>
+                                            <a href="{{ route('viewdonation', $donation->id) }}" class="btn btn-dark">
+                                                View Details
+                                            </a>
                                         @else
-                                        <button class="btn btn-dark" disabled>
-                                            View Details
-                                        </button>
+                                            <button class="btn btn-dark" disabled>
+                                                View Details
+                                            </button>
                                         @endif
                                     </div>
                                 </div>

@@ -29,9 +29,9 @@ DonaCook
                     DonaCook fights hunger and reduces waste by redistributing excess food to communities in need. 
                     We also empower home cooks with delicious recipes using low-cost ingredients, making great meals accessible to all.
                     </p>
-                    <button class="btn btn-explore">
+                    <a class="btn btn-explore" href="{{ route('donate') }}">
                         Donate <i class="fas fa-arrow-right ms-2"></i>
-                    </button>
+                    </a>
                 </div>
                 </div>
             </div>
@@ -129,7 +129,18 @@ DonaCook
         <div class="overlay">
             <h2>Join Our Membership Now!</h2>
             <p>Enjoy more freedom, inspiration, and support with DonaCook Membership.</p>
+            @if (Session::get('user'))
             <a href="{{ route('subscription') }}" class="btn btn-explore mt-3">Learn More <i class="fas fa-arrow-right ms-2"></i></a>
+            @endif
+            @if (Session::get('admin'))
+            <a href="#" class="btn btn-explore mt-3">Disabled</a>
+            @endif
+            @if (Session::get('restaurant'))
+            <a href="#" class="btn btn-explore mt-3">Disabled</a>
+            @endif
+            @if (!Session::get('restaurant') && !Session::get('admin') && !Session::get('user'))
+            <a href="{{ route('login') }}" class="btn btn-explore mt-3">Learn More <i class="fas fa-arrow-right ms-2"></i></a>
+            @endif
         </div>
     </div>
 

@@ -1,0 +1,133 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 3. Body & Global Typography */
+body {
+  background-color: #ffebcd;
+  color: #1F2937;
+  line-height: 1.6;
+}
+
+/* 5. Centered Container */
+.container-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 2rem;
+}
+
+/* 6. Card Box */
+.card-box {
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 700px;
+  width: 100%;
+}
+.card-box h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.75rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #1F2937;
+  letter-spacing: 1px;
+}
+
+/* 7. Form Labels & Fields */
+label {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #1F2937;
+}
+
+/* 8. Button */
+button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  background-color: #1F2937;
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: inline-block;
+  margin-top: 1rem;
+}
+button:hover {
+  background-color: #111827;
+}
+
+/* 9. Image Preview */
+#previewimage {
+  margin-top: 1rem;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: none;
+  border: 1px solid #D1D5DB;
+}
+
+/* 10. Alert */
+.alert-danger {
+  background-color: #FECACA;
+  color: #B91C1C;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+}
+.alert-danger ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: disc inside;
+}
+
+/* 11. Selection Highlight */
+::selection {
+  background-color: #1F2937;
+  color: #FFE9D2;
+}
+
+/* 12. Responsive (jika perlu) */
+@media (max-width: 640px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .container-centered {
+    padding: 1rem;
+  }
+}

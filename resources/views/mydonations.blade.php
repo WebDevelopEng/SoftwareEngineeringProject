@@ -1,11 +1,9 @@
-
-
 @extends('templates.headandfoot')
 
 @section('title', 'My Donations')
 
 @section('content')
-
+<link href="{{asset('viewcss/mydonations.css')}}" rel="stylesheet">
 <div class="container my-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="mb-0">My Donations</h3>

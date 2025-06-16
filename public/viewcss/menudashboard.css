@@ -1,5 +1,143 @@
-.carousel{
-    width:60%;
-    margin:auto;
-    margin-top:5%;
-}
+    :root {
+        --primary-color: #f1c40f;     
+        --secondary-color: #2c3e50;   
+        --accent-color: blanchedalmond;
+    }
+
+    body {
+        background-color: var(--accent-color);
+        color: var(--secondary-color);
+    }
+
+    /* Container Utama */
+    .dashboard-container {
+        width: 80%;
+        margin: auto;
+    }
+
+    /* Judul Search */
+    label[for="searchbar"] h3 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    /* Input Search */
+    .form-control {
+        border: 1px solid var(--secondary-color);
+        border-radius: 4px;
+        padding: 0.5rem;
+    }
+
+    .input-group-mb3 {
+        margin-top: 1rem;
+    }
+
+    .btn.btn-dark {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: var(--secondary-color);
+        transition: background-color 0.3s ease;
+    }
+
+    .btn.btn-dark:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+        color: var(--accent-color);
+    }
+
+    /* Kontainer Section Top Picks / Search */
+    .dashboard-section {
+        border: 2px solid var(--secondary-color);
+        border-radius: 5px;
+        width: 80%;
+        margin: auto;
+        padding: 1rem;
+        background-color: var(--accent-color);
+    }
+
+    /* Recipe Cards */
+    .card {
+        border: none;
+        border-radius: 8px;
+        background-color: var(--accent-color);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin: 1rem;
+    }
+
+    .card img {
+        width: 100%;
+        height: 150px;
+        object-fit: fill;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .card-body {
+        padding: 0.75rem;
+    }
+
+    .card-title {
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .card-text {
+        color: var(--secondary-color);
+    }
+
+    .btn.btn-info {
+        background-color: var(--primary-color);
+        border: none;
+        color: var(--secondary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .btn.btn-info:hover {
+        background-color: var(--secondary-color);
+        color: var(--accent-color);
+    }
+
+    .btn.btn-secondary {
+        background-color: var(--secondary-color);
+        border: none;
+        color: var(--accent-color);
+    }
+
+    .btn.btn-secondary.disabled, .btn.btn-secondary:disabled {
+        opacity: 0.6;
+    }
+
+    a.btn.btn-dark {
+        text-decoration: none;
+    }
+
+    /* Flex container untuk card */
+    .cards-wrapper {
+        display: flex;
+        width: 100%;
+        margin: auto;
+        margin-top: 2%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .carousel-img,
+    .profile-card img {
+        width: 100%;
+        height: 300px;       
+        object-fit: cover;
+        border-radius: 5px;   
+    }
+
+    .carousel-section {
+        max-width: 80%;
+        margin: 2rem auto 3rem;
+    }
+
+    .profile-card {
+        background-color: whitesmoke;
+        overflow: hidden;
+        border-radius: 5px;
+        max-width: 80%;
+        margin: 0 auto 2rem;
+    }
