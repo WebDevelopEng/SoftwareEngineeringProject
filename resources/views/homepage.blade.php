@@ -14,6 +14,7 @@ DonaCook
     <link href="{{asset('viewcss/css/bootstrap.css')}}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/9e788b7c72.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('viewjs/menudashboard.js') }}"></script>
 </head>
 
 <body style="background-color: blanchedalmond">
@@ -45,40 +46,35 @@ DonaCook
                 <h3 class="container-title">Our Top 3 Most Iconic Recipes</h3>
                 <div id="recipeCarousel" class="carousel slide w-50 mx-auto" data-bs-ride="false">
                     <div class="carousel-inner">
-
-                        <div class="carousel-item active">
-                            <div class="card profile-card" style="background-color: rgba(255, 255, 255, 0.7);">
-                                <img src="{{ asset('photo/satetempe.jpg') }}" class="card-img-top" alt="Recipe 1">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Recipe 1</h5>
-                                    <p class="card-text">Description for recipe 1.</p>
-                                    <a href="#" class="btn btn-explore">Explore Recipe</a>
+                        @foreach($collection as $recipe)
+                            @php
+                                $imageurl = "/storage/recipeimages/" . $recipe->image;
+                                $recipeurl = "/viewrecipe/" . $recipe->RecipeID;
+                            @endphp
+                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                <div class="card profile-card" style="background-color: rgba(255, 255, 255, 0.7);">
+                                    <img src="{{ $imageurl }}" alt="{{ $recipe->Name }}" class="card-img-top">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">{{ $recipe->Name }}</h5>
+                                        <p class="card-text">{{ Str::limit($recipe->Description, 25) }}</p>
+                                        @php
+                                            $isLocked = ($membership == 0 && $recipe->premium == 1 && null == Session::get('restaurant')) ||
+                                                        (null !== Session::get('restaurant') && Session::get('restaurant')->id !== $recipe->restaurant_id);
+                                        @endphp
+                                        @if($isLocked)
+                                            <a class="btn btn-explore disabled" href="{{ $recipeurl }}">
+                                                <i class="fa-solid fa-lock"></i> Recipe locked
+                                            </a>
+                                        @else
+                                            <a class="btn btn-explore" href="{{ $recipeurl }}">
+                                                View recipe <i class="fa-solid fa-arrow-right"></i>
+                                            </a>
+                                        @endif
+                                        <a href="#" class="btn btn-explore">Explore Recipe</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="carousel-item">
-                            <div class="card profile-card" style="background-color: rgba(255, 255, 255, 0.7);">
-                                <img src="{{ asset('photo/nasitempe.jpg') }}" class="card-img-top" alt="Recipe 2">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Recipe 2</h5>
-                                    <p class="card-text">Description for recipe 2.</p>
-                                    <a href="#" class="btn btn-explore">Explore Recipe</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item">
-                            <div class="card profile-card" style="background-color: rgba(255, 255, 255, 0.7);">
-                                <img src="{{ asset('photo/food3.jpg') }}" class="card-img-top" alt="Recipe 3">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Tempeh Bread</h5>
-                                    <p class="card-text">Tempeh Bread is a savory and nutritious dish made from fermented soybeans (tempeh) grilled or baked on skewers. It's rich in protein, has a firm texture, and is often coated in a flavorful sauce, making it a delicious plant-based option.</p>
-                                    <a href="#" class="btn btn-explore">Explore Recipe</a>
-                                </div>
-                            </div>
-                        </div>
-
+                        @endforeach
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#recipeCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon"></span>

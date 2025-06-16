@@ -11,13 +11,12 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\ViewEditRecipeandDonations;
 use App\Http\Middleware\SimpleRole;
 use App\Http\Middleware\DeleteRecipe;
+use App\Http\Controllers\HomeController;
 Route::get('/', function () {
     return view('homepage');
 });
 
-Route::get('/homepage',function(){
-    return view('homepage');
-})->name('homepage');
+Route::get('/homepage',[HomeController::class,'fullviewrecipe'])->name('homepage');
 
 Route::get('/aboutus',function(){
     return view('aboutus');
