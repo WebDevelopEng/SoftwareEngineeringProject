@@ -140,7 +140,7 @@ DonaCook
         <div class="row">
             <div class="col-md-3 col-sm-6 mb-4 card-spacing">
                 <div class="card profile-card h-100">
-                    <img src="{{ asset('photo/profile.png') }}" class="card-img-top" alt="Profile 1">
+                    <img src="{{ asset('photo/owen.jpg') }}" class="card-img-top" alt="Profile 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">Owen Kartolo</h5>
                         <p class="card-text">2602140345</p>
@@ -158,7 +158,7 @@ DonaCook
             </div>
             <div class="col-md-3 col-sm-6 mb-4 card-spacing">
                 <div class="card profile-card h-100">
-                    <img src="{{ asset('photo/profile.png') }}" class="card-img-top" alt="Profile 1">
+                    <img src="{{ asset('photo/chris.jpg') }}" class="card-img-top" alt="Profile 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">Christopher Parulian Marpaung</h5>
                         <p class="card-text">2602231993</p>
