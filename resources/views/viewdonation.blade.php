@@ -1,21 +1,22 @@
-
-
 @extends('templates.headandfoot')
 
 @section('title', 'View Donation')
 
 @section('content')
-<script src="{{asset('viewjs/viewdonation.js')}}"></script>
+
+<script src="{{ asset('viewjs/viewdonation.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('viewcss/viewdonation.css') }}">
+
 <div class="container mt-5">
     <h2>Donation Overview</h2><br>
     @if($donation)
         @php
-                    $imageUrl = $donation->image ? '/storage/donationimages/' . $donation->image : asset('EmptyImage.jpg');
-                    $restaurantImage=$donation->Restaurant->image ? '/storage/profileimages/'.$donation->Restaurant->image : asset('EmptyImage.jpg');
+            $imageUrl = $donation->image ? '/storage/donationimages/' . $donation->image : asset('EmptyImage.jpg');
+            $restaurantImage = $donation->Restaurant->image ? '/storage/profileimages/'.$donation->Restaurant->image : asset('EmptyImage.jpg');
         @endphp
         <div class="row">
             <div class="col-md-6">
-                <img src="{{$imageUrl}}" alt="Donation Image" class="img-fluid rounded">
+                <img src="{{ $imageUrl }}" alt="Donation Image" class="img-fluid rounded">
             </div>
             <div class="col-md-6">
                 <h2 class="mb-3">{{ $donation->name }}</h2>
@@ -37,30 +38,27 @@
                 @else
                     <p>Restaurant information not available.</p>
                 @endif
+
                 @if(Session::get('user'))
-                <span style="display:none" id="productprice">{{($donation->price)}}</span>
-                <h4>Cost:  </h4><b><span id="totalcost"> {{$donation->price}} </span> </b>
-                
-                <form method="post" action="{{route('addtransaction',['id'=> $donation->id])}}">
-                    @csrf
-                <div style="display:flex;width:200px;float:right;justify-content:center;">
-                <button type="button" class="btn btn-dark" onclick="decreasequantity()">-</button>
-                <input type="number" id="quantity" name="quantity" name="count" class="form-control" style="width:30%;text-align:center;" value="1" min="1">
-                <button type="button" class="btn btn-dark" onclick="addquantity()">+</button>
-                
-                
-</div>
-<br>
-<br>        
-<div style="display:flex;width:200px;float:right;justify-content:center;">
-                <button type="submit" class="btn btn-dark">Add to Order</button>
-</div>
-</form>
-@endif
+                    <span style="display:none" id="productprice">{{ $donation->price }}</span>
+                    <h4>Cost:</h4>
+                    <b><span id="totalcost">{{ $donation->price }}</span></b>
+
+                    <form method="post" action="{{ route('addtransaction', ['id' => $donation->id]) }}">
+                        @csrf
+                        <div style="display:flex; width:200px; float:right; justify-content:center;">
+                            <button type="button" class="btn btn-dark" onclick="decreasequantity()">-</button>
+                            <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1" style="width:30%; text-align:center;">
+                            <button type="button" class="btn btn-dark" onclick="addquantity()">+</button>
+                        </div>
+                        <br><br>
+                        <div style="display:flex; width:200px; float:right; justify-content:center;">
+                            <button type="submit" class="btn btn-dark">Add to Order</button>
+                        </div>
+                    </form>
+                @endif
             </div>
         </div>
     @endif
 </div>
-
-
 @endsection

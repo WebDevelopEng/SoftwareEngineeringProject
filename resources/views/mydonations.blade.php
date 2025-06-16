@@ -5,7 +5,7 @@
 @section('title', 'My Donations')
 
 @section('content')
-
+<link rel="stylesheet" href="mydonations.css">
 <div class="container my-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="mb-0">My Donations</h3>
