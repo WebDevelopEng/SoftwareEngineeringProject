@@ -8,53 +8,21 @@
 <link rel="stylesheet" href="{{ asset('viewcss/menudashboard.css') }}">
 <script src="{{ asset('viewjs/menudashboard.js') }}"></script>
 
-<div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel" style="margin: 30px auto 50px; max-width: 80%;">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            @php $carouselRecipes = $collection->take(3); @endphp
-            @foreach($carouselRecipes as $index => $recipe)
-            @php
-                $imageurl = "/storage/recipeimages/" . $recipe->image;
-                $recipeurl = "/viewrecipe/" . $recipe->RecipeID;
-            @endphp
-            
-        @endforeach
-        </div>
-
-        <div class="carousel-item @if($index == 0) active @endif">
-            <img src="{{ $imageurl }}" class="d-block w-100" style="height: 350px; object-fit: cover; border-radius:10px;" alt="Recipe image">
-            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
-                <h5>{{ $recipe->Name }}</h5>
-                <p>{{ Str::limit($recipe->Description, 100) }}</p>
-                <a href="{{ $recipeurl }}" class="btn btn-warning text-dark fw-bold">View Recipe</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <section class="search-section">
   <h3 class="search-title">Recipe Search</h3>
 
   <div class="search-bar-wrapper">
-    <form method="POST" action="/menudashboard" class="input-group">
-      @csrf
-      <input 
-        type="text" 
-        name="search" 
-        id="searchbar" 
-        class="form-control" 
-        placeholder="Search recipes…"
-      >
-      <button class="btn btn-dark" type="submit">
-        <i class="fa fa-search"></i>
-      </button>
+    <form action="{{ route('searchrecipe') }}" method="post" class="mb-3">
+        @csrf
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Search recipes...">
+            <button class="btn btn-dark" type="submit">Search</button>
+        </div>
     </form>
   </div>
 </section>
 
 <div class="dashboard-section mt-4">
-    <h2>{{ isset($state) ? 'Search' : 'Top Picks' }}</h2>
     <div class="cards-wrapper d-flex flex-wrap gap-4 justify-content-center mt-3">
         @foreach($collection as $recipe)
             @php
@@ -65,7 +33,7 @@
                 <img src="{{ $imageurl }}" alt="{{ $recipe->Name }}" style="width:100%; height:150px; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="card-title">{{ $recipe->Name }}</h5>
-                    <div class="btn btn-info mb-2">{{ $recipe->category }}</div>
+                    <div class="card-text"><strong>{{ $recipe->category }}</strong></div>
                     <p class="card-text">{{ Str::limit($recipe->Description, 25) }}</p>
                 </div>
                 <div class="px-3 pb-3">
