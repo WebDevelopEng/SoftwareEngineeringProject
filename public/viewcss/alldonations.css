@@ -13,7 +13,7 @@ body {
 
 /* 5. Container */
 .container {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.7);
   border: 2px solid #2c3e50;
   border-radius: 8px;
   padding: 20px;
@@ -24,7 +24,6 @@ body {
 
 /* 6. Headings */
 h3 {
-  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   color: #2c3e50;
   text-align: center;
@@ -60,13 +59,11 @@ h3 {
   border-bottom: none;
 }
 .donation-details h5 {
-  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   color: #2c3e50;
   margin-bottom: 5px;
 }
 .donation-details p {
-  font-family: 'Montserrat', sans-serif;
   font-weight: 300;
   color: #2c3e50;
   margin: 0;
@@ -83,7 +80,6 @@ h3 {
 
 /* 10. Buttons */
 .btn {
-  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   display: inline-block;
   margin-bottom: 5px;
