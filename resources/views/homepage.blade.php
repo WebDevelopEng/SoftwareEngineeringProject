@@ -29,9 +29,9 @@ DonaCook
                     DonaCook fights hunger and reduces waste by redistributing excess food to communities in need. 
                     We also empower home cooks with delicious recipes using low-cost ingredients, making great meals accessible to all.
                     </p>
-                    <button class="btn btn-explore">
+                    <a class="btn btn-explore" href="{{ route('donate') }}">
                         Donate <i class="fas fa-arrow-right ms-2"></i>
-                    </button>
+                    </a>
                 </div>
                 </div>
             </div>
