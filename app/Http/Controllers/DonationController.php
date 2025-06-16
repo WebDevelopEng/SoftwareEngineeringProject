@@ -49,6 +49,10 @@ class DonationController extends Controller
             $alldonations=donation::paginate(20);
             return view('makeadonation',['donations'=>$alldonations]);
         }
+        else{
+            $alldonations=donation::paginate(20);
+            return view('makeadonation',['donations'=>$alldonations]);
+        }
     }
 
     function updatedonation(Request $req, $donationid){
