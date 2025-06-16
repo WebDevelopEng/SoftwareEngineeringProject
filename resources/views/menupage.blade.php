@@ -20,14 +20,15 @@
         <script src="{{ asset('viewjs/menupage.js') }}"></script>
 
         <div id="ad-overlay">
-            <button type="button" onclick="closewindow()" class="btn btn-light position-absolute top-0 end-0 m-3">
-                <i class="fa fa-times"></i>
-            </button>
-        </div>
-        <div id="ad-modal">
-            <img src="{{ $adurl }}" class="img-fluid">
+            <div id="ad-modal">
+                <button type="button" onclick="closewindow()" id="close-button" class="btn btn-light">
+                    <i class="fa fa-times"></i>
+                </button>
+                <img src="{{ $adurl }}" class="img-fluid">
+            </div>
         </div>
     @endif
+
 
     {{-- RECIPE CARD --}}
     <div class="container" id="recipe-container">
@@ -84,4 +85,11 @@
         </div>
     </div>
 @endif
+
+<script>
+    function closewindow() {
+        document.getElementById('ad-overlay').style.display = 'none';
+        document.getElementById('ad-modal').style.display = 'none';
+    }
+</script>
 @endsection
