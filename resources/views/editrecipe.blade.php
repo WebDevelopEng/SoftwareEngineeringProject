@@ -5,7 +5,7 @@
 @section('content')
 
 <script src="{{ asset('viewjs/createmenu.js') }}"></script>
-<link href="{{ asset('viewcss/editrecipe.css') }}" type="text/css">
+<link href="{{ asset('viewcss/editrecipe.css') }}" rel="stylesheet">
 
 @php
     $imagelink = '/storage/recipeimages/' . $recipe->image;

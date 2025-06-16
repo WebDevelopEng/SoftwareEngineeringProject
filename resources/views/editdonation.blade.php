@@ -6,7 +6,7 @@
 
 @section('content')
     <script src="{{ asset('viewjs/createmenu.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('viewcss/editdonations.css') }}">
+    <link href="{{ asset('viewcss/editdonation.css') }}" rel="stylesheet" >
     <div class="donation-container">
         <div class="inner">
             @php

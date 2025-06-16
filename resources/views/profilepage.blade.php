@@ -76,6 +76,7 @@ $imageurl = $restaurant->image ? 'storage/profileimages/'.$restaurant->image : a
                 <input class="form-control" type="password" name="password" id="password">
                 <button class="btn btn-dark mt-3">Update Account</button>
             </form>
+            <br>
             <h3>Credit</h3>
             <p><b>Balance:</b> {{ $restaurant->balance }}</p>
         </div>

@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <script src="{{asset('viewjs/menudashboard.js')}}"></script>
-<link href="{{asset('viewcss/recipepage.css')}}">
+<link href="{{asset('viewcss/recipepage.css')}}" rel="stylesheet">
 <div class="carousel">
 </div>
 <div style="text-align:center;width:80%;margin:auto;">

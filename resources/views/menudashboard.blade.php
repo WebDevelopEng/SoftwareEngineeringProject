@@ -11,29 +11,24 @@
 <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel" style="margin: 30px auto 50px; max-width: 80%;">
     <div class="carousel-inner">
         <div class="carousel-item active">
-                    <div class="profile-card">
-                        <img
-                            src="{{ asset('photo/salmonbeurreblanc.jpg') }}"
-                            alt="Salmon Beurre Blanc"
-                            class="carousel-img"
-                        >
-                    </div>
-                </div>
-        @php $carouselRecipes = $collection->take(3); @endphp
-        @foreach($carouselRecipes as $index => $recipe)
+            @php $carouselRecipes = $collection->take(3); @endphp
+            @foreach($carouselRecipes as $index => $recipe)
             @php
                 $imageurl = "/storage/recipeimages/" . $recipe->image;
                 $recipeurl = "/viewrecipe/" . $recipe->RecipeID;
             @endphp
-            <div class="carousel-item @if($index == 0) active @endif">
-                <img src="{{ $imageurl }}" class="d-block w-100" style="height: 350px; object-fit: cover; border-radius:10px;" alt="Recipe image">
-                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
-                    <h5>{{ $recipe->Name }}</h5>
-                    <p>{{ Str::limit($recipe->Description, 100) }}</p>
-                    <a href="{{ $recipeurl }}" class="btn btn-warning text-dark fw-bold">View Recipe</a>
-                </div>
-            </div>
+            
         @endforeach
+        </div>
+
+        <div class="carousel-item @if($index == 0) active @endif">
+            <img src="{{ $imageurl }}" class="d-block w-100" style="height: 350px; object-fit: cover; border-radius:10px;" alt="Recipe image">
+            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                <h5>{{ $recipe->Name }}</h5>
+                <p>{{ Str::limit($recipe->Description, 100) }}</p>
+                <a href="{{ $recipeurl }}" class="btn btn-warning text-dark fw-bold">View Recipe</a>
+            </div>
+        </div>
     </div>
 </div>
 

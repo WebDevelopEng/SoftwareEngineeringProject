@@ -1,0 +1,135 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 4. Body */
+body {
+  background-color: blanchedalmond;
+  color: #2c3e50;
+  line-height: 1.6;
+}
+
+/* 5. Container */
+.container {
+  background-color: #fff;
+  border: 2px solid #2c3e50;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 40px auto;
+  max-width: 1200px;
+  box-shadow: 0 4px 8px rgba(44, 62, 80, 0.1);
+}
+
+/* 6. Headings */
+h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+  border-bottom: 2px solid #f1c40f;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* 7. Alert Messages */
+.alert {
+  background-color: #f1c40f;
+  color: #2c3e50;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+}
+.alert ul {
+  list-style: none;
+}
+
+/* 8. Donation List Item */
+.donation-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px dotted #2c3e50;
+}
+.donation-item:last-child {
+  border-bottom: none;
+}
+.donation-details h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+.donation-details p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  color: #2c3e50;
+  margin: 0;
+}
+
+/* 9. Image Styling */
+.img-thumbnail {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border: 2px solid #2c3e50;
+  border-radius: 50%;
+}
+
+/* 10. Buttons */
+.btn {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 5px;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-dark {
+  background-color: #2c3e50;
+  color: #f1c40f;
+  border: none;
+}
+.btn-dark:hover {
+  background-color: #1f2d3a;
+}
+.btn-info {
+  background-color: #f1c40f;
+  color: #2c3e50;
+  border: none;
+}
+.btn-info:hover {
+  background-color: #d4ac0d;
+}
+.btn-danger {
+  background-color: #2c3e50;
+  color: #f1c40f;
+  border: none;
+}
+.btn-danger:hover {
+  background-color: #1f2d3a;
+}
+
+/* 11. Responsive */
+@media (max-width: 768px) {
+  .donation-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  .ms-auto.text-end {
+    margin-top: 10px;
+  }
+}
+
+/* 12. Extra tip: selection styling */
+::selection {
+  background: #f1c40f;
+  color: #2c3e50;
+}

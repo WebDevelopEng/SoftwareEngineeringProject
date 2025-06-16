@@ -5,9 +5,9 @@
 @section('content')
 
 <script src="{{ asset('viewjs/viewdonation.js') }}"></script>
-<link rel="stylesheet" href="{{ asset('viewcss/viewdonation.css') }}">
+<link href="{{ asset('viewcss/viewdonation.css') }}" rel="stylesheet">
 
-<div class="container mt-5">
+<div class="card container mt-5">
     <h2>Donation Overview</h2><br>
     @if($donation)
         @php
@@ -28,7 +28,7 @@
 
                 <h4 class="mt-4">Created by:</h4>
                 @if($donation->Restaurant)
-                    <div class="d-flex align-items-center mt-2">
+                    <div class="d-flex align-items-center mt-2 justify-content-center">
                         <img src="{{ $restaurantImage }}" alt="Restaurant Image" class="rounded-circle" width="80" height="80">
                         <div class="ms-3">
                             <h5 class="mb-1">{{ $donation->Restaurant->restaurantName }}</h5>

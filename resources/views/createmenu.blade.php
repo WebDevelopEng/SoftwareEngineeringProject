@@ -6,7 +6,7 @@ Create a Recipe
 @section('content')
 
 <script src="{{ asset('viewjs/createmenu.js') }}"></script>
-<link rel="stylesheet" href="{{ asset('viewcss/createmenu.css') }}">
+<link href="{{ asset('viewcss/createmenu.css') }}"  rel="stylesheet">
 <div class="form-container">
     <h3>Enter Recipe Information</h3>
 

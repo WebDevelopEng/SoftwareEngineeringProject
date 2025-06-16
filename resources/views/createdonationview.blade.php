@@ -7,7 +7,7 @@ Create a Donation
 @section('content')
 
 <script src="{{ asset('viewjs/createmenu.js') }}"></script>
-<link rel="stylesheet" href="{{ asset('viewcss/createdonationview.css') }}">
+<link href="{{ asset('viewcss/createdonationview.css') }}" rel="stylesheet">
 
 <div class="container-centered">
     <div class="card-box">

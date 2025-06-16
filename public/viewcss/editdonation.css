@@ -1,0 +1,78 @@
+:root {
+        --primary-color: #f1c40f;      /* kuning emas */
+        --secondary-color: #2c3e50;
+        --accent-color: #ffebcd; 
+    }
+
+    body {
+        background-color: var(--accent-color);
+        color: var(--dark-color);
+    }
+
+    /* Styling container form */
+    .donation-container {
+        width: 80%;
+        margin: 20px auto;
+        border: 1px solid var(--dark-color);
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .donation-container .inner {
+        padding: 2%;
+    }
+
+    /* Heading */
+    h3 {
+        text-align: center;
+        color: var(--secondary-color);
+        margin-bottom: 1rem;
+    }
+
+    /* Form controls */
+    .form-control {
+        border: 1px solid var(--secondary-color);
+        border-radius: 4px;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Textarea */
+    textarea.form-control {
+        resize: vertical;
+    }
+
+    /* Button styling */
+    .btn-success {
+        background-color: var(--secondary-color);
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        color: var(--accent-color);
+        transition: background-color 0.3s ease;
+    }
+    
+    .btn-success:hover {
+        background-color: var(--primary-color);
+    }
+
+    /* Image Preview */
+    #previewimage {
+        display: block;
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        border: 1px solid var(--secondary-color);
+        border-radius: 4px;
+        margin: auto;
+    }
+
+    /* Alert */
+    .alert-danger {
+        background-color: rgba(200, 0, 0, 0.1);
+        border: 1px solid var(--dark-color);
+        border-radius: 4px;
+        padding: 1rem;
+        color: var(--dark-color);
+    }

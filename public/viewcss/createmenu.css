@@ -1,0 +1,80 @@
+body {
+        background-color: #ffe6c7;
+    }
+
+    .form-container {
+        width: 60%;
+        margin: 40px auto;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: 30px 40px;
+    }
+
+    .form-container h3 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
+
+    label {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .form-control,
+    .form-select,
+    input[type="text"] {
+        margin-top: 5px;
+        margin-bottom: 15px;
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    .form-check-group {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .form-check {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .form-check-input {
+        width: 18px;
+        height: 18px;
+        accent-color: #e07b39;
+    }
+
+    .btn-submit {
+        background-color: #e07b39;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 6px;
+        font-weight: bold;
+        width: 100%;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+    }
+
+    .btn-submit:hover {
+        background-color: #cf6c2c;
+    }
+
+    .preview {
+        width: 50%;
+        margin-top: 15px;
+        display: none;
+        border-radius: 8px;
+    }
+
+    .alert-danger {
+        margin-top: 20px;
+    }

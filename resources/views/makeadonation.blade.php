@@ -3,7 +3,7 @@
 @section('title', 'Available Donations')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('viewcss/makedonations.css') }}">
+<link href="{{ asset('viewcss/makedonation.css') }}" rel="stylesheet">
 <div class="container my-4">
     <h3 class="mb-3">Available Donations</h3>
     <form action="{{ route('searchdonations') }}" method="post" class="mb-3">

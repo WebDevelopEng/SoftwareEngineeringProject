@@ -1,0 +1,73 @@
+:root {
+        --primary-color: #2c3e50; 
+        --secondary-color: #f1c40f; 
+        --accent-color: white; 
+        --dark-color: #654321;
+        --background-color: #ffebcd; 
+    }
+    
+    body {
+        background-color: var(--background-color);
+        color: var(--dark-color);
+    }
+    
+    .container {
+        padding: 20px;
+    }
+    
+    /* Heading styling */
+    h3 {
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    
+    /* Styling untuk form pencarian */
+    .input-group .form-control {
+        border: 1px solid var(--secondary-color);
+    }
+    
+    .input-group .btn {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: var(--accent-color);
+        transition: background-color 0.3s ease;
+    }
+    
+    .input-group .btn:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+    }
+    
+    /* Card styling */
+    .card {
+        border: none;
+        border-radius: 8px;
+        background-color: var(--accent-color);
+    }
+    
+    .card-title {
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .card-text {
+        color: var(--dark-color);
+    }
+    
+    /* Button dalam card */
+    .btn.btn-dark {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: var(--accent-color);
+    }
+    
+    .btn.btn-dark:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+    }
+    
+    /* Gambar */
+    .img-fluid {
+        border-radius: 4px;
+    }
