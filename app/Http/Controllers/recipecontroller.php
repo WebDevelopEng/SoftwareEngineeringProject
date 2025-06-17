@@ -68,8 +68,8 @@ class recipecontroller extends Controller
                 'image'=>'required|image|mimes:jpeg,png,jpg,svg|max:2048'
             ]
             );
-        $currentrestaurant=session('restaurant')->id;
         $recipe=Recipe::find($id);
+        $currentrestaurant = $recipe -> restaurant_id;
         $recipe->Name=$req->name;
         $recipe->premium=$req->premium;
         $recipe->Ingredients=$req->ingredients;
