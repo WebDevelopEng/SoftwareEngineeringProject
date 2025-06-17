@@ -70,7 +70,6 @@ DonaCook
                                                 View recipe <i class="fa-solid fa-arrow-right"></i>
                                             </a>
                                         @endif
-                                        <a href="#" class="btn btn-explore">Explore Recipe</a>
                                     </div>
                                 </div>
                             </div>
