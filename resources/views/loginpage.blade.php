@@ -8,19 +8,19 @@ Login
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 <body style="background-color: rgba(255,235,205,1)">
 <div class="login-card">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form method="post" action="{{route('loginacc')}}" id="form" class="login-form">
         @csrf
         <h3 class="login-title" style="margin:0">Welcome to DonaCook!</h3>
         <p class="login-title">Please LOGIN to your own account!</p>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <div class="login-tabs">
             <button type="button" class="login-tab" onclick="logintype('userselection')" id="userselection">User</button>
             <button type="button" class="login-tab" onclick="logintype('adminselection')" id="adminselection">Admin</button>

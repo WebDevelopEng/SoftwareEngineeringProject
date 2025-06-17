@@ -52,7 +52,7 @@ class acccontroller extends Controller
         return redirect('/menudashboard');
     }
     else{
-        return view('loginpage',['errormessage'=>'login failed']);
+        return redirect()->back()->withErrors(['login' => 'Login failed'])->withInput();
     }
     }
     if($req->hidden=="restoselection"){
@@ -62,7 +62,7 @@ class acccontroller extends Controller
         return redirect('/menudashboard');
     }
     else{
-        return view('loginpage',['errormessage'=>'login failed']);
+        return redirect()->back()->withErrors(['login' => 'Login failed'])->withInput();
     }
     }
     if($req->hidden=="adminselection"){
@@ -72,7 +72,7 @@ class acccontroller extends Controller
         return redirect('/menudashboard');
     }
     else{
-        return view('loginpage',['errormessage'=>'login failed']);
+        return redirect()->back()->withErrors(['login' => 'Login failed'])->withInput();
     }
     }
     }
